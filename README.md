@@ -12,9 +12,9 @@ La ficha del proyecto está en `docs/FICHA.md` y las reglas comunes del ecosiste
 | `aviso-privacidad.html` | Aviso de privacidad del sitio (borrador) |
 | `terminos.html` | Términos de uso (borrador) |
 | `404.html` | Página de error. Usa `<base href="/PaginaCECAPI/">`: si se cambia a un dominio propio, cambiar a `<base href="/">` |
-| `assets/css/sitio.v3.css` | Estilos. Colores en variables de `:root`, con tema oscuro y contraste alto |
-| `assets/js/preferencias.v3.js` | Tema (automático, claro u oscuro), tamaño de texto y contraste alto (se guardan solo en el navegador) |
-| `assets/js/lectura.v1.js` | Botón "Escuchar esta página" con la voz del navegador |
+| `assets/css/sitio.v4.css` | Estilos. Colores en variables de `:root`, con tema oscuro y contraste alto |
+| `assets/js/preferencias.v4.js` | Tema (automático, claro u oscuro), tamaño de texto y contraste alto (se guardan solo en el navegador) |
+| `assets/js/lectura.v2.js` | Botón "Escuchar esta página" con la voz del navegador |
 | `assets/fuentes/` | Atkinson Hyperlegible, licencia SIL OFL 1.1 (`LICENCIA-OFL.txt`) |
 | `pruebas/` | Servidor local y revisión automática |
 
@@ -51,7 +51,7 @@ En GitHub: Settings, Pages, "Deploy from a branch", rama `main`, carpeta `/ (roo
 
 ### Caché
 
-GitHub Pages no deja configurar encabezados de caché. Por eso los CSS y JS llevan versión en el nombre (`.v3`). Cuando cambien, se copian a `.v4` y se actualizan los enlaces en todas las páginas, para que nadie vea una versión vieja.
+GitHub Pages no deja configurar encabezados de caché. Por eso los CSS y JS llevan versión en el nombre (`.v4`). Cuando cambien, se copian a `.v5` y se actualizan los enlaces en todas las páginas, para que nadie vea una versión vieja.
 
 ### Seguridad
 

@@ -96,6 +96,8 @@
 
     var repetir = document.getElementById("lectura-repetir");
     var siguiente = document.getElementById("lectura-siguiente");
+    var detenerBoton = document.getElementById("lectura-detener");
+    if (detenerBoton) detenerBoton.addEventListener("click", function () { if (leyendo) detener(); escuchar.focus(); });
     if (repetir) repetir.addEventListener("click", function () { if (leyendo) leer(Math.max(actual, 0)); });
     if (siguiente) siguiente.addEventListener("click", function () { if (leyendo) leer(actual + 1); });
     window.addEventListener("pagehide", detener);

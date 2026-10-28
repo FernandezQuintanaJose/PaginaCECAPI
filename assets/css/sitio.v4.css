@@ -3,7 +3,7 @@
    texto grande, contraste alto y foco siempre visible.
    Paleta: azul y blanco. Contraste (WCAG): texto #0f1f33 sobre blanco 16:1,
    azul #1d4e89 sobre blanco 8.9:1, blanco sobre azul #1d4e89 8.9:1.
-   El nombre lleva versión (v3): al cambiarlo, se renombra a v4 y se actualizan los enlaces. */
+   El nombre lleva versión (v4): al cambiarlo, se renombra a v5 y se actualizan los enlaces. */
 
 @font-face {
   font-family: "Atkinson Hyperlegible";
@@ -39,6 +39,7 @@
   --foco: #1d4e89;
   --error: #9b1c1c;
   --ancho: 68ch;
+  --pagina: 60rem;
   color-scheme: light;
 }
 
@@ -104,10 +105,12 @@ body {
 }
 
 h1, h2, h3 { line-height: 1.2; margin: 2rem 0 0.75rem; }
-h1 { font-size: 2.5rem; margin-top: 0; }
+h1 { font-size: clamp(2rem, 1.4rem + 2vw, 2.75rem); margin-top: 0; }
 h2 { font-size: 1.75rem; }
 h3 { font-size: 1.375rem; }
 p, ul, ol, dl { margin: 0 0 1rem; }
+/* Líneas de lectura cómodas aunque la página sea ancha. */
+main p, main li, main dd { max-width: var(--ancho); }
 li + li { margin-top: 0.4rem; }
 
 a { color: var(--acento); text-decoration-thickness: 0.1em; text-underline-offset: 0.2em; }
@@ -140,7 +143,7 @@ a:hover { text-decoration-thickness: 0.2em; }
 }
 
 .contenedor {
-  max-width: calc(var(--ancho) + 2rem);
+  max-width: calc(var(--pagina) + 2rem);
   margin: 0 auto;
   padding: 0 1rem;
 }
@@ -148,22 +151,33 @@ a:hover { text-decoration-thickness: 0.2em; }
 /* --- Encabezado --- */
 .cabecera { border-bottom: 1px solid var(--linea); }
 .cabecera .contenedor {
-  position: relative;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
-  gap: 0.5rem 1.5rem;
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
+  gap: 0.25rem 1rem;
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
 }
 .marca {
+  order: 1;
   font-weight: 700;
   font-size: 1.5rem;
   color: var(--tinta);
   text-decoration: none;
 }
-.navegacion { flex: 1 1 auto; }
+.boton-ajustes { order: 2; margin-left: auto; gap: 0.5rem; }
+.boton-ajustes::after {
+  content: "";
+  width: 0.55rem;
+  height: 0.55rem;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg) translateY(-0.1rem);
+}
+.boton-ajustes[aria-expanded="true"]::after { transform: rotate(225deg); }
+.boton-ajustes[aria-expanded="true"] { background: var(--suave); }
+.boton-ajustes[hidden] { display: none; }
+.navegacion { order: 3; flex: 1 1 100%; }
 .navegacion ul {
   display: flex;
   flex-wrap: wrap;
@@ -175,56 +189,42 @@ a:hover { text-decoration-thickness: 0.2em; }
 .navegacion li + li { margin-top: 0; }
 .navegacion a[aria-current="page"] { font-weight: 700; text-decoration-thickness: 0.2em; }
 
-/* --- Menú de ajustes de lectura --- */
-.menu-ajustes summary {
-  list-style: none;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  min-height: 2.75rem;
-  padding: 0.4rem 0.9rem;
-  border: 1.5px solid var(--linea);
-  border-radius: 0.5rem;
-  font-weight: 700;
-  font-size: 1.05rem;
-  color: var(--tinta);
-  background: var(--papel);
+/* Tablet y computadora: nombre, enlaces y ajustes en una sola fila. */
+@media (min-width: 48rem) {
+  .navegacion { order: 2; flex: 1 1 auto; }
+  .boton-ajustes { order: 3; margin-left: 0; }
 }
-.menu-ajustes summary::-webkit-details-marker { display: none; }
-.menu-ajustes summary::after {
-  content: "";
-  width: 0.55rem;
-  height: 0.55rem;
-  border-right: 2px solid currentColor;
-  border-bottom: 2px solid currentColor;
-  transform: rotate(45deg) translateY(-0.1rem);
-}
-.menu-ajustes[open] summary::after { transform: rotate(225deg); }
-.menu-ajustes[open] summary { background: var(--suave); }
 
-.menu-panel {
-  position: absolute;
-  right: 1rem;
-  top: calc(100% - 0.25rem);
-  z-index: 5;
-  width: min(22rem, calc(100vw - 2rem));
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-  padding: 0.75rem;
-  background: var(--papel);
-  border: 1.5px solid var(--linea);
-  border-radius: 0.6rem;
-  box-shadow: 0 0.5rem 1.5rem rgba(15, 31, 51, 0.18);
+/* --- Panel de ajustes de lectura: empuja el contenido, no lo tapa --- */
+.panel-ajustes {
+  background: var(--suave);
+  border-bottom: 1px solid var(--linea);
 }
-.menu-panel p { margin: 0; }
-.menu-panel button { width: 100%; justify-content: flex-start; }
-.menu-panel .grupo { display: flex; gap: 0.35rem; }
-.menu-panel .rotulo { font-weight: 700; font-size: 1rem; margin: 0.4rem 0 0; }
-.menu-panel .grupo button { justify-content: center; }
-#controles-lectura { display: flex; flex-direction: column; gap: 0.35rem; }
-#controles-lectura[hidden] { display: none; }
+.panel-ajustes[hidden] { display: none; }
+.panel-ajustes .contenedor {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.9rem 1.5rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+@media (min-width: 40rem) {
+  .panel-ajustes .contenedor { grid-template-columns: repeat(auto-fit, minmax(12.5rem, 1fr)); }
+}
+.panel-ajustes .rotulo { font-weight: 700; font-size: 1rem; margin: 0 0 0.35rem; }
+.panel-ajustes .grupo { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.panel-ajustes .grupo button { flex: 1 1 auto; justify-content: center; }
+
+/* Controles de la lectura en voz alta: quedan a la vista mientras se lee. */
+.barra-lectura {
+  position: sticky;
+  top: 0;
+  z-index: 4;
+  background: var(--papel);
+  border-bottom: 1px solid var(--linea);
+}
+.barra-lectura[hidden] { display: none; }
+.barra-lectura .contenedor { display: flex; flex-wrap: wrap; gap: 0.5rem; padding-top: 0.5rem; padding-bottom: 0.5rem; }
 
 /* --- Botones: sobrios; solo el principal lleva relleno --- */
 button, .boton {
@@ -276,7 +276,7 @@ button:disabled { opacity: 0.55; cursor: not-allowed; }
 }
 .franja h1 { margin: 1rem 0 0.5rem; max-width: 22ch; }
 .franja p { font-size: 1.375rem; margin: 0; max-width: 40ch; }
-.braille { display: block; height: 3.5rem; width: auto; max-width: 100%; }
+.braille { display: block; height: clamp(3.5rem, 2.5rem + 3vw, 4.75rem); width: auto; max-width: 100%; }
 .braille circle { fill: var(--sobre-acento); }
 .braille circle.vacio { fill: none; stroke: var(--sobre-acento); stroke-width: 1; opacity: 0.45; }
 
@@ -285,7 +285,8 @@ main > .contenedor > section { margin-top: 2.5rem; }
 
 .pendiente {
   border-left: 4px solid var(--acento);
-  padding: 0.5rem 1rem;
+  padding: 0.4rem 0.85rem;
+  font-size: 1.05rem;
   background: var(--suave);
 }
 

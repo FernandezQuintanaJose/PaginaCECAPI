@@ -57,14 +57,30 @@
       });
     });
     marcarTema();
-    var menu = document.querySelector(".menu-ajustes");
-    if (menu) {
-      // Escape cierra el menú y devuelve el foco al botón que lo abre.
-      menu.addEventListener("keydown", function (e) {
-        if (e.key === "Escape" && menu.open) {
-          menu.open = false;
-          menu.querySelector("summary").focus();
+    var abrir = document.getElementById("abrir-ajustes");
+    var panel = document.getElementById("panel-ajustes");
+    if (abrir && panel) {
+      // Sin JavaScript no hay ajustes: el botón solo aparece si el script corre.
+      abrir.hidden = false;
+      var cerrar = function (devolverFoco) {
+        panel.hidden = true;
+        abrir.setAttribute("aria-expanded", "false");
+        if (devolverFoco) abrir.focus();
+      };
+      abrir.addEventListener("click", function () {
+        if (panel.hidden) {
+          panel.hidden = false;
+          abrir.setAttribute("aria-expanded", "true");
+        } else {
+          cerrar(false);
         }
+      });
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && !panel.hidden) cerrar(true);
+      });
+      // Tocar fuera del panel lo cierra.
+      document.addEventListener("click", function (e) {
+        if (!panel.hidden && !panel.contains(e.target) && !abrir.contains(e.target)) cerrar(false);
       });
     }
     if (menos) menos.addEventListener("click", function () { cambiarEscala(-1); });
