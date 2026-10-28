@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8">
+  <base href="/PaginaCECAPI/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Página no encontrada, CECAPI</title>
+  <meta name="description" content="Página no encontrada.">
+  <link rel="preload" href="assets/fuentes/atkinson-hyperlegible-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/sitio.v1.css">
+  <script src="assets/js/preferencias.v1.js"></script>
+  <script src="assets/js/lectura.v1.js" defer></script>
+</head>
+<body>
+  <a class="salto" href="#contenido">Saltar al contenido</a>
+
+  <header class="cabecera">
+    <div class="contenedor">
+      <a class="marca" href="./">CECAPI</a>
+      <nav class="navegacion" aria-label="Principal">
+        <ul>
+          <li><a href="./">Inicio</a></li>
+          <li><a href="./#contacto">Contacto</a></li>
+          <li><a href="./#asistente">Asistente y apps</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="ajustes" aria-labelledby="titulo-ajustes">
+    <div class="contenedor">
+      <h2 id="titulo-ajustes">Ajustes de lectura</h2>
+      <button type="button" id="texto-menos">Texto más chico</button>
+      <button type="button" id="texto-mas">Texto más grande</button>
+      <button type="button" id="contraste" aria-pressed="false">Contraste alto</button>
+      <button type="button" id="escuchar" aria-pressed="false">Escuchar esta página</button>
+      <span id="controles-lectura" hidden>
+        <button type="button" id="lectura-repetir">Repetir párrafo</button>
+        <button type="button" id="lectura-siguiente">Siguiente párrafo</button>
+      </span>
+      <p id="aviso-ajustes" class="solo-lector" role="status"></p>
+    </div>
+  </section>
+
+  <main id="contenido" tabindex="-1">
+    <div class="contenedor">
+      <h1>Esta página no existe</h1>
+      <p>La dirección puede estar mal escrita o la página se movió.</p>
+      <p><a href="./">Ir al inicio del sitio de CECAPI</a></p>
+    </div>
+  </main>
+
+  <footer class="pie">
+    <div class="contenedor">
+      <ul>
+        <li><a href="aviso-privacidad.html">Aviso de privacidad</a></li>
+        <li><a href="terminos.html">Términos de uso</a></li>
+      </ul>
+      <p>Centro de Capacitación para Invidentes A. C., Durango.</p>
+    </div>
+  </footer>
+</body>
+</html>

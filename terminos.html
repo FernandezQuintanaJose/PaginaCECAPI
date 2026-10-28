@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Términos de uso, CECAPI</title>
+  <meta name="description" content="Términos de uso del sitio de CECAPI.">
+  <link rel="preload" href="assets/fuentes/atkinson-hyperlegible-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/sitio.v1.css">
+  <script src="assets/js/preferencias.v1.js"></script>
+  <script src="assets/js/lectura.v1.js" defer></script>
+</head>
+<body>
+  <a class="salto" href="#contenido">Saltar al contenido</a>
+
+  <header class="cabecera">
+    <div class="contenedor">
+      <a class="marca" href="./">CECAPI</a>
+      <nav class="navegacion" aria-label="Principal">
+        <ul>
+          <li><a href="./">Inicio</a></li>
+          <li><a href="./#contacto">Contacto</a></li>
+          <li><a href="./#asistente">Asistente y apps</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="ajustes" aria-labelledby="titulo-ajustes">
+    <div class="contenedor">
+      <h2 id="titulo-ajustes">Ajustes de lectura</h2>
+      <button type="button" id="texto-menos">Texto más chico</button>
+      <button type="button" id="texto-mas">Texto más grande</button>
+      <button type="button" id="contraste" aria-pressed="false">Contraste alto</button>
+      <button type="button" id="escuchar" aria-pressed="false">Escuchar esta página</button>
+      <span id="controles-lectura" hidden>
+        <button type="button" id="lectura-repetir">Repetir párrafo</button>
+        <button type="button" id="lectura-siguiente">Siguiente párrafo</button>
+      </span>
+      <p id="aviso-ajustes" class="solo-lector" role="status"></p>
+    </div>
+  </section>
+
+  <main id="contenido" tabindex="-1">
+    <div class="contenedor">
+      <h1>Términos de uso del sitio</h1>
+      <p class="pendiente" data-sin-lectura>Borrador del 28 de octubre de 2026. Debe revisarlo un asesor legal antes de publicarse.</p>
+
+      <h2>Para qué sirve este sitio</h2>
+      <p>Este sitio da información general sobre el Centro de Capacitación para Invidentes A. C. y enlaza al asistente de voz y a las apps.</p>
+
+      <h2>Datos que pueden cambiar</h2>
+      <p>Horarios, servicios y datos de contacto pueden cambiar. Antes de acudir, confirma por teléfono al 618 455 0146.</p>
+
+      <h2>Sitios de terceros</h2>
+      <p>Algunos enlaces llevan a otros sitios, como Google Maps. Esos sitios tienen sus propios términos y avisos de privacidad.</p>
+    </div>
+  </main>
+
+  <footer class="pie">
+    <div class="contenedor">
+      <ul>
+        <li><a href="aviso-privacidad.html">Aviso de privacidad</a></li>
+        <li><a href="terminos.html">Términos de uso</a></li>
+      </ul>
+      <p>Centro de Capacitación para Invidentes A. C., Durango.</p>
+    </div>
+  </footer>
+</body>
+</html>

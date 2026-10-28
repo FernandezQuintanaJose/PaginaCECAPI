@@ -1,0 +1,13 @@
+{
+  "name": "pagina-cecapi",
+  "private": true,
+  "description": "Sitio institucional de CECAPI. Sin compilación: los archivos se publican tal cual en GitHub Pages.",
+  "scripts": {
+    "servir": "node pruebas/servidor.mjs",
+    "revisar": "node pruebas/revisar.mjs"
+  },
+  "devDependencies": {
+    "axe-core": "^4.10.2",
+    "playwright": "^1.48.0"
+  }
+}

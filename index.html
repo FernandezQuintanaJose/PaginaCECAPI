@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>CECAPI, Centro de Capacitación para Invidentes</title>
+  <meta name="description" content="Centro de Capacitación para Invidentes A. C. en Durango: ubicación, horario, contacto y asistente de voz.">
+  <link rel="preload" href="assets/fuentes/atkinson-hyperlegible-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/sitio.v1.css">
+  <script src="assets/js/preferencias.v1.js"></script>
+  <script src="assets/js/lectura.v1.js" defer></script>
+</head>
+<body>
+  <a class="salto" href="#contenido">Saltar al contenido</a>
+
+  <header class="cabecera">
+    <div class="contenedor">
+      <a class="marca" href="./">CECAPI</a>
+      <nav class="navegacion" aria-label="Principal">
+        <ul>
+          <li><a href="./" aria-current="page">Inicio</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+          <li><a href="#asistente">Asistente y apps</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="ajustes" aria-labelledby="titulo-ajustes">
+    <div class="contenedor">
+      <h2 id="titulo-ajustes">Ajustes de lectura</h2>
+      <button type="button" id="texto-menos">Texto más chico</button>
+      <button type="button" id="texto-mas">Texto más grande</button>
+      <button type="button" id="contraste" aria-pressed="false">Contraste alto</button>
+      <button type="button" id="escuchar" aria-pressed="false">Escuchar esta página</button>
+      <span id="controles-lectura" hidden>
+        <button type="button" id="lectura-repetir">Repetir párrafo</button>
+        <button type="button" id="lectura-siguiente">Siguiente párrafo</button>
+      </span>
+      <p id="aviso-ajustes" class="solo-lector" role="status"></p>
+    </div>
+  </section>
+
+  <main id="contenido" tabindex="-1">
+    <div class="franja">
+      <div class="contenedor">
+        <svg class="braille" viewBox="0 0 154 32" aria-hidden="true" focusable="false"><circle cx="6" cy="6" r="4"/><circle cx="6" cy="16" r="3" class="vacio"/><circle cx="6" cy="26" r="3" class="vacio"/><circle cx="16" cy="6" r="4"/><circle cx="16" cy="16" r="3" class="vacio"/><circle cx="16" cy="26" r="3" class="vacio"/><circle cx="32" cy="6" r="4"/><circle cx="32" cy="16" r="3" class="vacio"/><circle cx="32" cy="26" r="3" class="vacio"/><circle cx="42" cy="6" r="3" class="vacio"/><circle cx="42" cy="16" r="4"/><circle cx="42" cy="26" r="3" class="vacio"/><circle cx="58" cy="6" r="4"/><circle cx="58" cy="16" r="3" class="vacio"/><circle cx="58" cy="26" r="3" class="vacio"/><circle cx="68" cy="6" r="4"/><circle cx="68" cy="16" r="3" class="vacio"/><circle cx="68" cy="26" r="3" class="vacio"/><circle cx="84" cy="6" r="4"/><circle cx="84" cy="16" r="3" class="vacio"/><circle cx="84" cy="26" r="3" class="vacio"/><circle cx="94" cy="6" r="3" class="vacio"/><circle cx="94" cy="16" r="3" class="vacio"/><circle cx="94" cy="26" r="3" class="vacio"/><circle cx="110" cy="6" r="4"/><circle cx="110" cy="16" r="4"/><circle cx="110" cy="26" r="4"/><circle cx="120" cy="6" r="4"/><circle cx="120" cy="16" r="3" class="vacio"/><circle cx="120" cy="26" r="3" class="vacio"/><circle cx="136" cy="6" r="3" class="vacio"/><circle cx="136" cy="16" r="4"/><circle cx="136" cy="26" r="3" class="vacio"/><circle cx="146" cy="6" r="4"/><circle cx="146" cy="16" r="3" class="vacio"/><circle cx="146" cy="26" r="3" class="vacio"/></svg>
+        <h1>Centro de Capacitación para Invidentes</h1>
+        <p>Asociación civil en Durango que atiende a personas ciegas y con baja visión.</p>
+      </div>
+    </div>
+
+    <div class="contenedor">
+      <section aria-labelledby="titulo-quienes">
+        <h2 id="titulo-quienes">Quiénes somos</h2>
+        <p class="pendiente">Texto pendiente. CECAPI debe entregar su descripción oficial: historia, misión y a quién atiende.</p>
+      </section>
+
+      <section aria-labelledby="titulo-servicios">
+        <h2 id="titulo-servicios">Servicios</h2>
+        <p class="pendiente">Lista pendiente. CECAPI debe confirmar qué cursos y servicios ofrece, para quién y si tienen costo.</p>
+      </section>
+
+      <section id="contacto" aria-labelledby="titulo-contacto">
+        <h2 id="titulo-contacto">Contacto y horario</h2>
+        <dl class="datos">
+          <dt>Dirección</dt>
+          <dd>Calle Jacarandá 1603, colonia Valle Florido, código postal 34226, Durango, Durango.</dd>
+          <dt>Teléfono</dt>
+          <dd><a href="tel:+526184550146">618 455 0146</a></dd>
+          <dt>Horario</dt>
+          <dd>Lunes a viernes, de 2 a 7 de la tarde.</dd>
+        </dl>
+        <p><a href="https://www.google.com/maps/search/?api=1&amp;query=Jacarand%C3%A1%201603%2C%20Valle%20Florido%2C%2034226%20Durango%2C%20Dgo.">Abrir la dirección en Google Maps</a> (se abre otro sitio).</p>
+        <p class="pendiente">Datos tomados de Google Maps el 24 de octubre de 2026. Falta que CECAPI los confirme.</p>
+      </section>
+
+      <section id="asistente" aria-labelledby="titulo-asistente">
+        <h2 id="titulo-asistente">Asistente de voz y aplicaciones</h2>
+        <p>CECAPI tiene un asistente con inteligencia artificial que responde preguntas en español. Se puede usar desde el navegador, desde una app para Android y, más adelante, desde una app para Windows.</p>
+        <p><a class="boton boton-principal" href="https://fernandezquintanajose.github.io/PaginaAsistenteCECAPI/">Abrir el asistente</a></p>
+        <p><a href="https://fernandezquintanajose.github.io/PaginaAsistenteCECAPI/descargas.html">Descargar las apps para Android y Windows</a></p>
+      </section>
+    </div>
+  </main>
+
+  <footer class="pie">
+    <div class="contenedor">
+      <ul>
+        <li><a href="aviso-privacidad.html">Aviso de privacidad</a></li>
+        <li><a href="terminos.html">Términos de uso</a></li>
+      </ul>
+      <p>Centro de Capacitación para Invidentes A. C., Durango.</p>
+    </div>
+  </footer>
+</body>
+</html>

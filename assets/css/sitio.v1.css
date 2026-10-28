@@ -1,0 +1,239 @@
+/* Estilos comunes del sitio CECAPI y del asistente web.
+   Pensados para baja visión: fuente Atkinson Hyperlegible (Braille Institute),
+   texto grande, contraste alto y foco siempre visible.
+   El nombre lleva versión (v1): al cambiarlo, se renombra a v2 y se actualizan los enlaces. */
+
+@font-face {
+  font-family: "Atkinson Hyperlegible";
+  src: url("../fuentes/atkinson-hyperlegible-latin-400-normal.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Atkinson Hyperlegible";
+  src: url("../fuentes/atkinson-hyperlegible-latin-400-italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Atkinson Hyperlegible";
+  src: url("../fuentes/atkinson-hyperlegible-latin-700-normal.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --escala: 1;
+  --papel: #ffffff;
+  --tinta: #14213d;
+  --suave: #eef2f7;
+  --linea: #5a6b85;
+  --acento: #1d5c7a;
+  --senal: #f2b705;
+  --sobre-senal: #14213d;
+  --error: #9b1c1c;
+  --ancho: 68ch;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-tema="claro"]) {
+    --papel: #0e1a2e;
+    --tinta: #f3f5f9;
+    --suave: #18284a;
+    --linea: #a9b6cc;
+    --acento: #8cc8e8;
+    --error: #ffb4b4;
+    color-scheme: dark;
+  }
+}
+
+/* Contraste máximo, elegido por la persona. Gana sobre el tema del sistema. */
+:root[data-contraste="alto"] {
+  --papel: #000000;
+  --tinta: #ffffff;
+  --suave: #000000;
+  --linea: #ffffff;
+  --acento: #ffe14d;
+  --senal: #ffe14d;
+  --sobre-senal: #000000;
+  --error: #ff9c9c;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  font-size: calc(100% * var(--escala));
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--papel);
+  color: var(--tinta);
+  font-family: "Atkinson Hyperlegible", Verdana, sans-serif;
+  font-size: 1.25rem;
+  line-height: 1.6;
+  overflow-wrap: break-word;
+}
+
+h1, h2, h3 { line-height: 1.2; margin: 2rem 0 0.75rem; }
+h1 { font-size: 2.5rem; margin-top: 0; }
+h2 { font-size: 1.75rem; }
+h3 { font-size: 1.375rem; }
+p, ul, ol, dl { margin: 0 0 1rem; }
+li + li { margin-top: 0.4rem; }
+
+a { color: var(--acento); text-decoration-thickness: 0.1em; text-underline-offset: 0.2em; }
+a:hover { text-decoration-thickness: 0.2em; }
+
+:focus-visible {
+  outline: 3px solid var(--tinta);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 7px var(--senal);
+}
+
+.salto {
+  position: absolute;
+  left: 1rem;
+  top: -10rem;
+  z-index: 10;
+  padding: 0.75rem 1rem;
+  background: var(--senal);
+  color: var(--sobre-senal);
+  font-weight: 700;
+}
+.salto:focus { top: 1rem; }
+
+.solo-lector {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.contenedor {
+  max-width: calc(var(--ancho) + 2rem);
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* --- Encabezado --- */
+.cabecera { border-bottom: 2px solid var(--linea); }
+.cabecera .contenedor {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+.marca {
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--tinta);
+  text-decoration: none;
+}
+.navegacion ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.25rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.navegacion li + li { margin-top: 0; }
+.navegacion a[aria-current="page"] { font-weight: 700; text-decoration-thickness: 0.2em; }
+
+/* --- Ajustes de lectura --- */
+.ajustes {
+  background: var(--suave);
+  border-bottom: 1px solid var(--linea);
+}
+.ajustes .contenedor {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+.ajustes h2 { font-size: 1rem; margin: 0 0.5rem 0 0; }
+
+button, .boton {
+  font: inherit;
+  font-size: 1.05rem;
+  font-weight: 700;
+  min-height: 2.75rem;
+  padding: 0.4rem 1rem;
+  border: 2px solid var(--tinta);
+  border-radius: 0.4rem;
+  background: var(--papel);
+  color: var(--tinta);
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+button[aria-pressed="true"] { background: var(--tinta); color: var(--papel); }
+button:disabled { opacity: 0.55; cursor: not-allowed; }
+.boton-principal {
+  background: var(--senal);
+  color: var(--sobre-senal);
+  border-color: var(--sobre-senal);
+}
+
+/* Lectura en voz alta: el bloque que se está leyendo. */
+.leyendo {
+  background: var(--senal);
+  color: var(--sobre-senal);
+  outline: 4px solid var(--senal);
+}
+
+/* --- Franja de celdas braille: el único adorno del sitio --- */
+.franja {
+  background: var(--senal);
+  color: var(--sobre-senal);
+  padding: 2rem 0 2.25rem;
+}
+.franja h1 { margin: 1rem 0 0.5rem; max-width: 22ch; }
+.franja p { font-size: 1.375rem; margin: 0; max-width: 40ch; }
+.braille { display: block; height: 3.5rem; width: auto; max-width: 100%; }
+.braille circle { fill: var(--sobre-senal); }
+.braille circle.vacio { fill: none; stroke: var(--sobre-senal); stroke-width: 1; opacity: 0.35; }
+
+main { padding-bottom: 3rem; }
+main > .contenedor > section { margin-top: 2.5rem; }
+
+.pendiente {
+  border-left: 6px solid var(--senal);
+  padding: 0.5rem 1rem;
+  background: var(--suave);
+}
+
+dl.datos { display: grid; grid-template-columns: max-content 1fr; gap: 0.5rem 1.5rem; }
+dl.datos dt { font-weight: 700; }
+dl.datos dd { margin: 0; }
+@media (max-width: 30rem) {
+  dl.datos { grid-template-columns: 1fr; gap: 0.1rem; }
+  dl.datos dd { margin-bottom: 0.75rem; }
+}
+
+.pie {
+  border-top: 2px solid var(--linea);
+  padding: 1.5rem 0 2rem;
+  font-size: 1.05rem;
+}
+.pie ul { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; }
+.pie li + li { margin-top: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
+}
