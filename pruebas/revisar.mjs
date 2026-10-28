@@ -16,9 +16,11 @@ const navegador = await chromium.launch();
 let fallas = 0;
 
 // bypassCSP solo deja inyectar axe; la página real conserva su política.
-for (const esquema of ["light", "dark", "alto"]) {
-  const contexto = await navegador.newContext({ bypassCSP: true, colorScheme: esquema === "alto" ? "light" : esquema, viewport: { width: 375, height: 800 } });
+for (const esquema of ["light", "dark", "alto", "oscuro-manual", "claro-manual"]) {
+  const contexto = await navegador.newContext({ bypassCSP: true, colorScheme: esquema === "dark" || esquema === "claro-manual" ? "dark" : "light", viewport: { width: 375, height: 800 } });
   if (esquema === "alto") await contexto.addInitScript(() => localStorage.setItem("cecapi.contraste", "alto"));
+  if (esquema === "oscuro-manual") await contexto.addInitScript(() => localStorage.setItem("cecapi.tema", "oscuro"));
+  if (esquema === "claro-manual") await contexto.addInitScript(() => localStorage.setItem("cecapi.tema", "claro"));
   for (const nombre of PAGINAS) {
     const pagina = await contexto.newPage();
     const problemas = [];

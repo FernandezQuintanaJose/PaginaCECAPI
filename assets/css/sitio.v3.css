@@ -3,7 +3,7 @@
    texto grande, contraste alto y foco siempre visible.
    Paleta: azul y blanco. Contraste (WCAG): texto #0f1f33 sobre blanco 16:1,
    azul #1d4e89 sobre blanco 8.9:1, blanco sobre azul #1d4e89 8.9:1.
-   El nombre lleva versión (v2): al cambiarlo, se renombra a v3 y se actualizan los enlaces. */
+   El nombre lleva versión (v3): al cambiarlo, se renombra a v4 y se actualizan los enlaces. */
 
 @font-face {
   font-family: "Atkinson Hyperlegible";
@@ -42,8 +42,9 @@
   color-scheme: light;
 }
 
+/* Tema: sin elección (automático) sigue al sistema; "claro" y "oscuro" lo fijan. */
 @media (prefers-color-scheme: dark) {
-  :root:not([data-tema="claro"]) {
+  :root:not([data-tema]) {
     --papel: #0b1a2e;
     --tinta: #f1f5fb;
     --suave: #152a47;
@@ -55,6 +56,18 @@
     --error: #ffb4b4;
     color-scheme: dark;
   }
+}
+:root[data-tema="oscuro"] {
+  --papel: #0b1a2e;
+  --tinta: #f1f5fb;
+  --suave: #152a47;
+  --linea: #8fa3bf;
+  --acento: #8fb8e8;
+  --sobre-acento: #0b1a2e;
+  --resalte: #24508a;
+  --foco: #8fb8e8;
+  --error: #ffb4b4;
+  color-scheme: dark;
 }
 
 /* Contraste máximo, elegido por la persona. Gana sobre el tema del sistema. */
@@ -208,6 +221,7 @@ a:hover { text-decoration-thickness: 0.2em; }
 .menu-panel p { margin: 0; }
 .menu-panel button { width: 100%; justify-content: flex-start; }
 .menu-panel .grupo { display: flex; gap: 0.35rem; }
+.menu-panel .rotulo { font-weight: 700; font-size: 1rem; margin: 0.4rem 0 0; }
 .menu-panel .grupo button { justify-content: center; }
 #controles-lectura { display: flex; flex-direction: column; gap: 0.35rem; }
 #controles-lectura[hidden] { display: none; }

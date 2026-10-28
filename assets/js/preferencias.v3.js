@@ -15,6 +15,8 @@
   var indice = ESCALAS.indexOf(Number(leer("cecapi.escala")));
   if (indice < 0) indice = 0;
   raiz.style.setProperty("--escala", ESCALAS[indice]);
+  var tema = leer("cecapi.tema");
+  if (tema === "claro" || tema === "oscuro") raiz.setAttribute("data-tema", tema);
   if (leer("cecapi.contraste") === "alto") raiz.setAttribute("data-contraste", "alto");
 
   function anunciar(texto) {
@@ -38,6 +40,23 @@
     var menos = document.getElementById("texto-menos");
     var mas = document.getElementById("texto-mas");
     var contraste = document.getElementById("contraste");
+    var NOMBRES = { auto: "automático", claro: "claro", oscuro: "oscuro" };
+    function marcarTema() {
+      var actual = raiz.getAttribute("data-tema") || "auto";
+      Array.prototype.forEach.call(document.querySelectorAll("[data-tema-boton]"), function (b) {
+        b.setAttribute("aria-pressed", String(b.getAttribute("data-tema-boton") === actual));
+      });
+    }
+    Array.prototype.forEach.call(document.querySelectorAll("[data-tema-boton]"), function (b) {
+      b.addEventListener("click", function () {
+        var valor = b.getAttribute("data-tema-boton");
+        if (valor === "auto") { raiz.removeAttribute("data-tema"); guardar("cecapi.tema", "auto"); }
+        else { raiz.setAttribute("data-tema", valor); guardar("cecapi.tema", valor); }
+        marcarTema();
+        anunciar("Tema " + NOMBRES[valor] + ".");
+      });
+    });
+    marcarTema();
     var menu = document.querySelector(".menu-ajustes");
     if (menu) {
       // Escape cierra el menú y devuelve el foco al botón que lo abre.

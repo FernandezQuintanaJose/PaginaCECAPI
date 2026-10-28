@@ -8,8 +8,8 @@
   <title>CECAPI, Centro de Capacitación para Invidentes</title>
   <meta name="description" content="Centro de Capacitación para Invidentes A. C. en Durango: ubicación, horario, contacto y asistente de voz.">
   <link rel="preload" href="assets/fuentes/atkinson-hyperlegible-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="assets/css/sitio.v2.css">
-  <script src="assets/js/preferencias.v2.js"></script>
+  <link rel="stylesheet" href="assets/css/sitio.v3.css">
+  <script src="assets/js/preferencias.v3.js"></script>
   <script src="assets/js/lectura.v1.js" defer></script>
 </head>
 <body>
@@ -31,6 +31,12 @@
           <div class="grupo">
             <button type="button" id="texto-menos">Texto más chico</button>
             <button type="button" id="texto-mas">Texto más grande</button>
+          </div>
+          <p class="rotulo" id="rotulo-tema">Tema de color</p>
+          <div class="grupo" role="group" aria-labelledby="rotulo-tema">
+            <button type="button" data-tema-boton="auto" aria-pressed="true">Automático</button>
+            <button type="button" data-tema-boton="claro" aria-pressed="false">Claro</button>
+            <button type="button" data-tema-boton="oscuro" aria-pressed="false">Oscuro</button>
           </div>
           <button type="button" id="contraste" aria-pressed="false">Contraste alto</button>
           <button type="button" id="escuchar" aria-pressed="false">Escuchar esta página</button>
