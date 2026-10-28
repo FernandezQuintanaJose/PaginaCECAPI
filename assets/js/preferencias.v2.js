@@ -38,6 +38,16 @@
     var menos = document.getElementById("texto-menos");
     var mas = document.getElementById("texto-mas");
     var contraste = document.getElementById("contraste");
+    var menu = document.querySelector(".menu-ajustes");
+    if (menu) {
+      // Escape cierra el menú y devuelve el foco al botón que lo abre.
+      menu.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && menu.open) {
+          menu.open = false;
+          menu.querySelector("summary").focus();
+        }
+      });
+    }
     if (menos) menos.addEventListener("click", function () { cambiarEscala(-1); });
     if (mas) mas.addEventListener("click", function () { cambiarEscala(1); });
     if (contraste) {

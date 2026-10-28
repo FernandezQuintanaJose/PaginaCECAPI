@@ -1,7 +1,9 @@
 /* Estilos comunes del sitio CECAPI y del asistente web.
    Pensados para baja visión: fuente Atkinson Hyperlegible (Braille Institute),
    texto grande, contraste alto y foco siempre visible.
-   El nombre lleva versión (v1): al cambiarlo, se renombra a v2 y se actualizan los enlaces. */
+   Paleta: azul y blanco. Contraste (WCAG): texto #0f1f33 sobre blanco 16:1,
+   azul #1d4e89 sobre blanco 8.9:1, blanco sobre azul #1d4e89 8.9:1.
+   El nombre lleva versión (v2): al cambiarlo, se renombra a v3 y se actualizan los enlaces. */
 
 @font-face {
   font-family: "Atkinson Hyperlegible";
@@ -28,12 +30,13 @@
 :root {
   --escala: 1;
   --papel: #ffffff;
-  --tinta: #14213d;
-  --suave: #eef2f7;
-  --linea: #5a6b85;
-  --acento: #1d5c7a;
-  --senal: #f2b705;
-  --sobre-senal: #14213d;
+  --tinta: #0f1f33;
+  --suave: #eef3f9;
+  --linea: #5b6f88;
+  --acento: #1d4e89;
+  --sobre-acento: #ffffff;
+  --resalte: #cfe2f7;
+  --foco: #1d4e89;
   --error: #9b1c1c;
   --ancho: 68ch;
   color-scheme: light;
@@ -41,11 +44,14 @@
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-tema="claro"]) {
-    --papel: #0e1a2e;
-    --tinta: #f3f5f9;
-    --suave: #18284a;
-    --linea: #a9b6cc;
-    --acento: #8cc8e8;
+    --papel: #0b1a2e;
+    --tinta: #f1f5fb;
+    --suave: #152a47;
+    --linea: #8fa3bf;
+    --acento: #8fb8e8;
+    --sobre-acento: #0b1a2e;
+    --resalte: #24508a;
+    --foco: #8fb8e8;
     --error: #ffb4b4;
     color-scheme: dark;
   }
@@ -58,11 +64,14 @@
   --suave: #000000;
   --linea: #ffffff;
   --acento: #ffe14d;
-  --senal: #ffe14d;
-  --sobre-senal: #000000;
+  --sobre-acento: #000000;
+  --resalte: #ffe14d;
+  --foco: #ffe14d;
   --error: #ff9c9c;
   color-scheme: dark;
 }
+:root[data-contraste="alto"] .resalte-texto,
+:root[data-contraste="alto"] .leyendo { color: #000000; }
 
 *, *::before, *::after { box-sizing: border-box; }
 
@@ -92,9 +101,8 @@ a { color: var(--acento); text-decoration-thickness: 0.1em; text-underline-offse
 a:hover { text-decoration-thickness: 0.2em; }
 
 :focus-visible {
-  outline: 3px solid var(--tinta);
+  outline: 3px solid var(--foco);
   outline-offset: 3px;
-  box-shadow: 0 0 0 7px var(--senal);
 }
 
 .salto {
@@ -103,8 +111,8 @@ a:hover { text-decoration-thickness: 0.2em; }
   top: -10rem;
   z-index: 10;
   padding: 0.75rem 1rem;
-  background: var(--senal);
-  color: var(--sobre-senal);
+  background: var(--acento);
+  color: var(--sobre-acento);
   font-weight: 700;
 }
 .salto:focus { top: 1rem; }
@@ -125,13 +133,14 @@ a:hover { text-decoration-thickness: 0.2em; }
 }
 
 /* --- Encabezado --- */
-.cabecera { border-bottom: 2px solid var(--linea); }
+.cabecera { border-bottom: 1px solid var(--linea); }
 .cabecera .contenedor {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 0.75rem 1.5rem;
+  gap: 0.5rem 1.5rem;
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
 }
@@ -141,6 +150,7 @@ a:hover { text-decoration-thickness: 0.2em; }
   color: var(--tinta);
   text-decoration: none;
 }
+.navegacion { flex: 1 1 auto; }
 .navegacion ul {
   display: flex;
   flex-wrap: wrap;
@@ -152,29 +162,65 @@ a:hover { text-decoration-thickness: 0.2em; }
 .navegacion li + li { margin-top: 0; }
 .navegacion a[aria-current="page"] { font-weight: 700; text-decoration-thickness: 0.2em; }
 
-/* --- Ajustes de lectura --- */
-.ajustes {
-  background: var(--suave);
-  border-bottom: 1px solid var(--linea);
-}
-.ajustes .contenedor {
-  display: flex;
-  flex-wrap: wrap;
+/* --- Menú de ajustes de lectura --- */
+.menu-ajustes summary {
+  list-style: none;
+  cursor: pointer;
+  display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+  min-height: 2.75rem;
+  padding: 0.4rem 0.9rem;
+  border: 1.5px solid var(--linea);
+  border-radius: 0.5rem;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--tinta);
+  background: var(--papel);
 }
-.ajustes h2 { font-size: 1rem; margin: 0 0.5rem 0 0; }
+.menu-ajustes summary::-webkit-details-marker { display: none; }
+.menu-ajustes summary::after {
+  content: "";
+  width: 0.55rem;
+  height: 0.55rem;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg) translateY(-0.1rem);
+}
+.menu-ajustes[open] summary::after { transform: rotate(225deg); }
+.menu-ajustes[open] summary { background: var(--suave); }
 
+.menu-panel {
+  position: absolute;
+  right: 1rem;
+  top: calc(100% - 0.25rem);
+  z-index: 5;
+  width: min(22rem, calc(100vw - 2rem));
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 0.75rem;
+  background: var(--papel);
+  border: 1.5px solid var(--linea);
+  border-radius: 0.6rem;
+  box-shadow: 0 0.5rem 1.5rem rgba(15, 31, 51, 0.18);
+}
+.menu-panel p { margin: 0; }
+.menu-panel button { width: 100%; justify-content: flex-start; }
+.menu-panel .grupo { display: flex; gap: 0.35rem; }
+.menu-panel .grupo button { justify-content: center; }
+#controles-lectura { display: flex; flex-direction: column; gap: 0.35rem; }
+#controles-lectura[hidden] { display: none; }
+
+/* --- Botones: sobrios; solo el principal lleva relleno --- */
 button, .boton {
   font: inherit;
   font-size: 1.05rem;
   font-weight: 700;
   min-height: 2.75rem;
   padding: 0.4rem 1rem;
-  border: 2px solid var(--tinta);
-  border-radius: 0.4rem;
+  border: 1.5px solid var(--linea);
+  border-radius: 0.5rem;
   background: var(--papel);
   color: var(--tinta);
   cursor: pointer;
@@ -182,38 +228,49 @@ button, .boton {
   display: inline-flex;
   align-items: center;
 }
-button[aria-pressed="true"] { background: var(--tinta); color: var(--papel); }
+button:hover, .boton:hover { background: var(--suave); }
+button[aria-pressed="true"] { background: var(--resalte); border-color: var(--acento); }
 button:disabled { opacity: 0.55; cursor: not-allowed; }
 .boton-principal {
-  background: var(--senal);
-  color: var(--sobre-senal);
-  border-color: var(--sobre-senal);
+  background: var(--acento);
+  color: var(--sobre-acento);
+  border-color: var(--acento);
 }
+.boton-principal:hover { background: var(--acento); filter: brightness(1.12); }
+.boton-texto {
+  border-color: transparent;
+  background: transparent;
+  color: var(--acento);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+.boton-texto:hover { background: var(--suave); }
 
 /* Lectura en voz alta: el bloque que se está leyendo. */
 .leyendo {
-  background: var(--senal);
-  color: var(--sobre-senal);
-  outline: 4px solid var(--senal);
+  background: var(--resalte);
+  outline: 3px solid var(--resalte);
 }
 
 /* --- Franja de celdas braille: el único adorno del sitio --- */
 .franja {
-  background: var(--senal);
-  color: var(--sobre-senal);
+  background: var(--acento);
+  color: var(--sobre-acento);
   padding: 2rem 0 2.25rem;
 }
 .franja h1 { margin: 1rem 0 0.5rem; max-width: 22ch; }
 .franja p { font-size: 1.375rem; margin: 0; max-width: 40ch; }
 .braille { display: block; height: 3.5rem; width: auto; max-width: 100%; }
-.braille circle { fill: var(--sobre-senal); }
-.braille circle.vacio { fill: none; stroke: var(--sobre-senal); stroke-width: 1; opacity: 0.35; }
+.braille circle { fill: var(--sobre-acento); }
+.braille circle.vacio { fill: none; stroke: var(--sobre-acento); stroke-width: 1; opacity: 0.45; }
 
 main { padding-bottom: 3rem; }
 main > .contenedor > section { margin-top: 2.5rem; }
 
 .pendiente {
-  border-left: 6px solid var(--senal);
+  border-left: 4px solid var(--acento);
   padding: 0.5rem 1rem;
   background: var(--suave);
 }
@@ -227,7 +284,7 @@ dl.datos dd { margin: 0; }
 }
 
 .pie {
-  border-top: 2px solid var(--linea);
+  border-top: 1px solid var(--linea);
   padding: 1.5rem 0 2rem;
   font-size: 1.05rem;
 }

@@ -8,8 +8,8 @@
   <title>Términos de uso, CECAPI</title>
   <meta name="description" content="Términos de uso del sitio de CECAPI.">
   <link rel="preload" href="assets/fuentes/atkinson-hyperlegible-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="assets/css/sitio.v1.css">
-  <script src="assets/js/preferencias.v1.js"></script>
+  <link rel="stylesheet" href="assets/css/sitio.v2.css">
+  <script src="assets/js/preferencias.v2.js"></script>
   <script src="assets/js/lectura.v1.js" defer></script>
 </head>
 <body>
@@ -25,23 +25,24 @@
           <li><a href="./#asistente">Asistente y apps</a></li>
         </ul>
       </nav>
-    </div>
-  </header>
-
-  <section class="ajustes" aria-labelledby="titulo-ajustes">
-    <div class="contenedor">
-      <h2 id="titulo-ajustes">Ajustes de lectura</h2>
-      <button type="button" id="texto-menos">Texto más chico</button>
-      <button type="button" id="texto-mas">Texto más grande</button>
-      <button type="button" id="contraste" aria-pressed="false">Contraste alto</button>
-      <button type="button" id="escuchar" aria-pressed="false">Escuchar esta página</button>
-      <span id="controles-lectura" hidden>
+      <details class="menu-ajustes">
+        <summary>Ajustes de lectura</summary>
+        <div class="menu-panel">
+          <div class="grupo">
+            <button type="button" id="texto-menos">Texto más chico</button>
+            <button type="button" id="texto-mas">Texto más grande</button>
+          </div>
+          <button type="button" id="contraste" aria-pressed="false">Contraste alto</button>
+          <button type="button" id="escuchar" aria-pressed="false">Escuchar esta página</button>
+          <div id="controles-lectura" hidden>
         <button type="button" id="lectura-repetir">Repetir párrafo</button>
         <button type="button" id="lectura-siguiente">Siguiente párrafo</button>
-      </span>
+      </div>
+        </div>
+      </details>
       <p id="aviso-ajustes" class="solo-lector" role="status"></p>
     </div>
-  </section>
+  </header>
 
   <main id="contenido" tabindex="-1">
     <div class="contenedor">
