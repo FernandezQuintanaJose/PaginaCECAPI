@@ -6,11 +6,12 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'none'">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>CECAPI, Centro de Capacitación para Invidentes</title>
-  <meta name="description" content="Centro de Capacitación para Invidentes A. C. en Durango: ubicación, horario, contacto y asistente de voz.">
+  <meta name="description" content="Centro de Capacitación para Invidentes A. C. en Durango: asociación civil sin fines de lucro con servicios gratuitos para personas ciegas y con baja visión.">
   <link rel="preload" href="assets/fuentes/atkinson-hyperlegible-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="assets/css/sitio.v4.css">
+  <link rel="stylesheet" href="assets/css/sitio.v5.css">
   <script src="assets/js/preferencias.v4.js"></script>
   <script src="assets/js/lectura.v2.js" defer></script>
+  <script src="assets/js/galeria.v1.js" defer></script>
 </head>
 <body>
   <a class="salto" href="#contenido">Saltar al contenido</a>
@@ -22,8 +23,11 @@
       <nav class="navegacion" aria-label="Principal">
         <ul>
           <li><a href="./" aria-current="page">Inicio</a></li>
-          <li><a href="#contacto">Contacto</a></li>
-          <li><a href="#asistente">Asistente y apps</a></li>
+          <li><a href="./#historia">Historia</a></li>
+          <li><a href="./#servicios">Servicios</a></li>
+          <li><a href="./#gente">Nuestra gente</a></li>
+          <li><a href="./#contacto">Contacto</a></li>
+          <li><a href="./#asistente">Asistente y apps</a></li>
         </ul>
       </nav>
     </div>
@@ -74,19 +78,43 @@
       <div class="contenedor">
         <svg class="braille" viewBox="0 0 154 32" aria-hidden="true" focusable="false"><circle cx="6" cy="6" r="4"/><circle cx="6" cy="16" r="3" class="vacio"/><circle cx="6" cy="26" r="3" class="vacio"/><circle cx="16" cy="6" r="4"/><circle cx="16" cy="16" r="3" class="vacio"/><circle cx="16" cy="26" r="3" class="vacio"/><circle cx="32" cy="6" r="4"/><circle cx="32" cy="16" r="3" class="vacio"/><circle cx="32" cy="26" r="3" class="vacio"/><circle cx="42" cy="6" r="3" class="vacio"/><circle cx="42" cy="16" r="4"/><circle cx="42" cy="26" r="3" class="vacio"/><circle cx="58" cy="6" r="4"/><circle cx="58" cy="16" r="3" class="vacio"/><circle cx="58" cy="26" r="3" class="vacio"/><circle cx="68" cy="6" r="4"/><circle cx="68" cy="16" r="3" class="vacio"/><circle cx="68" cy="26" r="3" class="vacio"/><circle cx="84" cy="6" r="4"/><circle cx="84" cy="16" r="3" class="vacio"/><circle cx="84" cy="26" r="3" class="vacio"/><circle cx="94" cy="6" r="3" class="vacio"/><circle cx="94" cy="16" r="3" class="vacio"/><circle cx="94" cy="26" r="3" class="vacio"/><circle cx="110" cy="6" r="4"/><circle cx="110" cy="16" r="4"/><circle cx="110" cy="26" r="4"/><circle cx="120" cy="6" r="4"/><circle cx="120" cy="16" r="3" class="vacio"/><circle cx="120" cy="26" r="3" class="vacio"/><circle cx="136" cy="6" r="3" class="vacio"/><circle cx="136" cy="16" r="4"/><circle cx="136" cy="26" r="3" class="vacio"/><circle cx="146" cy="6" r="4"/><circle cx="146" cy="16" r="3" class="vacio"/><circle cx="146" cy="26" r="3" class="vacio"/></svg>
         <h1>Centro de Capacitación para Invidentes</h1>
-        <p>Asociación civil en Durango que atiende a personas ciegas y con baja visión.</p>
+        <p>Asociación civil sin fines de lucro en Durango. Atiende a personas ciegas y con baja visión. Todos sus servicios son gratuitos.</p>
       </div>
     </div>
 
     <div class="contenedor">
-      <section aria-labelledby="titulo-quienes">
-        <h2 id="titulo-quienes">Quiénes somos</h2>
-        <p class="pendiente">Texto pendiente. CECAPI debe entregar su descripción oficial: historia, misión y a quién atiende.</p>
+      <section id="historia" aria-labelledby="titulo-historia">
+        <h2 id="titulo-historia">Nuestra historia</h2>
+        <p class="pendiente">Texto pendiente. CECAPI debe contar cómo nació: en qué año y por qué se fundó, quiénes la fundaron, dónde empezó a trabajar, cómo ha crecido y cuántas personas ha atendido. Con esa información se redacta esta sección.</p>
       </section>
 
-      <section aria-labelledby="titulo-servicios">
+      <section id="servicios" aria-labelledby="titulo-servicios">
         <h2 id="titulo-servicios">Servicios</h2>
-        <p class="pendiente">Lista pendiente. CECAPI debe confirmar qué cursos y servicios ofrece, para quién y si tienen costo.</p>
+        <p class="destacado">Todos los servicios de CECAPI son gratuitos. Es una institución sin fines de lucro.</p>
+        <ul class="lista-servicios">
+          <li>Cocina</li>
+          <li>Encuadernación</li>
+          <li>Educación física</li>
+          <li>Computación</li>
+          <li>Elaboración de piñatas</li>
+          <li>Aprendizaje de ciclismo</li>
+          <li>Orientación y movilidad</li>
+        </ul>
+        <p class="pendiente">Faltan por confirmar con CECAPI: en qué consiste cada servicio, horarios, requisitos y si hay más servicios.</p>
+      </section>
+
+      <section id="gente" aria-labelledby="titulo-gente">
+        <h2 id="titulo-gente">Nuestra gente</h2>
+        <p>Las personas que han pasado por CECAPI, y quienes las acompañan.</p>
+        <div id="galeria" class="collage">
+          <div class="hueco" aria-hidden="true"></div>
+          <div class="hueco" aria-hidden="true"></div>
+          <div class="hueco" aria-hidden="true"></div>
+          <div class="hueco" aria-hidden="true"></div>
+          <div class="hueco" aria-hidden="true"></div>
+          <div class="hueco" aria-hidden="true"></div>
+        </div>
+        <p id="galeria-aviso" class="pendiente">Fotos pendientes. CECAPI entregará las imágenes; cada una lleva una descripción para quien no ve y necesita el permiso por escrito de las personas que aparecen.</p>
       </section>
 
       <section id="contacto" aria-labelledby="titulo-contacto">

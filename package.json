@@ -4,7 +4,8 @@
   "description": "Sitio institucional de CECAPI. Sin compilación: los archivos se publican tal cual en GitHub Pages.",
   "scripts": {
     "servir": "node pruebas/servidor.mjs",
-    "revisar": "node pruebas/revisar.mjs"
+    "revisar": "node pruebas/revisar.mjs",
+    "galeria": "node pruebas/galeria.mjs"
   },
   "devDependencies": {
     "axe-core": "^4.10.2",

@@ -1,9 +1,9 @@
 /* Estilos comunes del sitio CECAPI y del asistente web.
    Pensados para baja visión: fuente Atkinson Hyperlegible (Braille Institute),
    texto grande, contraste alto y foco siempre visible.
-   Paleta: azul y blanco. Contraste (WCAG): texto #0f1f33 sobre blanco 16:1,
-   azul #1d4e89 sobre blanco 8.9:1, blanco sobre azul #1d4e89 8.9:1.
-   El nombre lleva versión (v4): al cambiarlo, se renombra a v5 y se actualizan los enlaces. */
+   Paleta: verde y blanco, los colores de CECAPI. Contraste (WCAG AA): texto #10231a sobre blanco 16:1,
+   verde #1c6b3c sobre blanco 6.5:1, blanco sobre verde #1c6b3c 6.5:1. Oscuro: verde claro #8fd4a6 sobre #0c1a12 10:1.
+   El nombre lleva versión (v5): al cambiarlo, se renombra a v6 y se actualizan los enlaces. */
 
 @font-face {
   font-family: "Atkinson Hyperlegible";
@@ -30,13 +30,13 @@
 :root {
   --escala: 1;
   --papel: #ffffff;
-  --tinta: #0f1f33;
-  --suave: #eef3f9;
-  --linea: #5b6f88;
-  --acento: #1d4e89;
+  --tinta: #10231a;
+  --suave: #eef6f0;
+  --linea: #5a7364;
+  --acento: #1c6b3c;
   --sobre-acento: #ffffff;
-  --resalte: #cfe2f7;
-  --foco: #1d4e89;
+  --resalte: #d6eddc;
+  --foco: #1c6b3c;
   --error: #9b1c1c;
   --ancho: 68ch;
   --pagina: 60rem;
@@ -46,27 +46,27 @@
 /* Tema: sin elección (automático) sigue al sistema; "claro" y "oscuro" lo fijan. */
 @media (prefers-color-scheme: dark) {
   :root:not([data-tema]) {
-    --papel: #0b1a2e;
-    --tinta: #f1f5fb;
-    --suave: #152a47;
-    --linea: #8fa3bf;
-    --acento: #8fb8e8;
-    --sobre-acento: #0b1a2e;
-    --resalte: #24508a;
-    --foco: #8fb8e8;
+    --papel: #0c1a12;
+    --tinta: #eef6f0;
+    --suave: #162b1f;
+    --linea: #8fae9b;
+    --acento: #8fd4a6;
+    --sobre-acento: #0c1a12;
+    --resalte: #25593a;
+    --foco: #8fd4a6;
     --error: #ffb4b4;
     color-scheme: dark;
   }
 }
 :root[data-tema="oscuro"] {
-  --papel: #0b1a2e;
-  --tinta: #f1f5fb;
-  --suave: #152a47;
-  --linea: #8fa3bf;
-  --acento: #8fb8e8;
-  --sobre-acento: #0b1a2e;
-  --resalte: #24508a;
-  --foco: #8fb8e8;
+  --papel: #0c1a12;
+  --tinta: #eef6f0;
+  --suave: #162b1f;
+  --linea: #8fae9b;
+  --acento: #8fd4a6;
+  --sobre-acento: #0c1a12;
+  --resalte: #25593a;
+  --foco: #8fd4a6;
   --error: #ffb4b4;
   color-scheme: dark;
 }
@@ -309,3 +309,32 @@ dl.datos dd { margin: 0; }
 @media (prefers-reduced-motion: reduce) {
   * { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
 }
+
+/* --- Servicios --- */
+.destacado {
+  border-left: 6px solid var(--acento);
+  background: var(--suave);
+  padding: 0.75rem 1rem;
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+.lista-servicios {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.5rem;
+}
+.lista-servicios li { margin: 0; max-width: none; padding: 0.6rem 0.75rem; border: 1px solid var(--linea); border-radius: 0.5rem; font-weight: 700; overflow-wrap: anywhere; }
+@media (min-width: 40rem) { .lista-servicios { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* --- Collage de fotos (los huecos se reemplazan cuando haya fotos) --- */
+.collage { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem; margin: 1rem 0; }
+@media (min-width: 40rem) {
+  .collage { grid-template-columns: repeat(3, 1fr); }
+  .collage > :first-child { grid-column: span 2; grid-row: span 2; }
+}
+.collage figure { margin: 0; }
+.collage img { display: block; width: 100%; height: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 0.5rem; background: var(--suave); }
+.collage figcaption { font-size: 1rem; margin-top: 0.25rem; max-width: var(--ancho); }
+.hueco { aspect-ratio: 4 / 3; border: 2px dashed var(--linea); border-radius: 0.5rem; background: var(--suave); }
