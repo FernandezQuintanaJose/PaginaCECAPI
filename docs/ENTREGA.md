@@ -1,5 +1,7 @@
 # Entrega del sitio CECAPI (4 nov 2026)
 
+**Qué hace cada quien esta semana: [TAREAS.md](TAREAS.md).**
+
 Revisión completa, hallazgos de todo el ecosistema y orden sugerido para la semana: [docs/estado/2026-11-04-revision-qa-y-entrega.md](https://github.com/FernandezQuintanaJose/EstadiasAppMobil/blob/docs/revision-qa-4nov/docs/estado/2026-11-04-revision-qa-y-entrega.md) en EstadiasAppMobil (rama `docs/revision-qa-4nov`).
 
 ## Estado
