@@ -7,6 +7,13 @@ Revisión completa, hallazgos de todo el ecosistema y orden sugerido para la sem
 - Se corrigió el servidor de pruebas local en Windows (la raíz daba 404).
 - No hay secretos en el repositorio ni en su historial (búsqueda de claves y cadenas de conexión).
 
+## Editor de contenido (nuevo)
+- `admin/` permite agregar, editar, ocultar, quitar y ordenar servicios, equipo y fotos, y cambiar los textos del sitio. Explicación, casos de uso y límites en `docs/CONTENIDO.md`.
+- No usa servidor ni base de datos: cambia los archivos de `datos/` con un commit, con el permiso de GitHub. No toca Neon ni a los demás equipos.
+- Pruebas: `npm run validar` (49), `npm run contenido` (35), `npm run admin` (79, contra una GitHub simulada).
+- **Falta probar una publicación real** con una llave de verdad. Hazlo primero en una copia o rama de prueba (cambiar `REPO.rama` en `assets/js/admin.v1.js`) antes de dárselo a CECAPI.
+- Invitar a la persona de CECAPI como colaboradora y que cree su propia llave (pasos en `admin/index.html`).
+
 ## Para entregar
 1. Fusionar `qa/correcciones` a `main`.
 2. Pedir a CECAPI y reemplazar los textos con recuadro `pendiente`: historia, qué incluye cada servicio, horarios y requisitos. No escribir lo que CECAPI no haya confirmado.

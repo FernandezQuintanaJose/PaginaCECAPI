@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "lema": "Asociación civil sin fines de lucro en Durango. Atiende a personas ciegas y con baja visión. Todos sus servicios son gratuitos.",
+  "mision": "",
+  "vision": "",
+  "historia": [],
+  "contacto": {
+    "direccion": "Calle Jacarandá 1603, colonia Valle Florido, código postal 34226, Durango, Durango.",
+    "telefono": "618 455 0146",
+    "horario": "Lunes a viernes, de 2 a 7 de la tarde.",
+    "correo": "",
+    "comoLlegar": "",
+    "enlaces": []
+  },
+  "revisado": {
+    "servicios": false,
+    "contacto": false
+  }
+}

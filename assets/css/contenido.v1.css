@@ -1,0 +1,22 @@
+/* Secciones que se llenan con el contenido editable (datos/*.json). Usa las variables de sitio.v5.css. */
+
+/* Servicio con detalles: deja de ser una etiqueta corta y pasa a ser una tarjeta. */
+.lista-servicios li.detallado { font-weight: 400; }
+.lista-servicios li.detallado h3 { margin: 0 0 0.4rem; font-size: 1.2rem; }
+.lista-servicios li.detallado p { max-width: none; margin: 0.4rem 0; }
+.lista-servicios li.detallado dl.datos { margin: 0.6rem 0 0; }
+.foto-servicio { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 0.5rem; background: var(--suave); }
+
+/* Equipo */
+.equipo { list-style: none; padding: 0; margin: 1rem 0; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr)); }
+.equipo li { margin: 0; max-width: none; padding: 0.75rem; border: 1px solid var(--linea); border-radius: 0.5rem; }
+.equipo img { display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 0.5rem; background: var(--suave); }
+.equipo h4 { margin: 0.6rem 0 0; font-size: 1.15rem; }
+.equipo p { max-width: none; margin: 0.25rem 0 0; }
+.equipo .cargo { font-weight: 700; }
+
+/* Enlaces de contacto (redes, etc.) */
+.lista-enlaces { list-style: none; padding: 0; }
+.lista-enlaces li { margin: 0.25rem 0; max-width: none; }
+
+#quienes-texto h3 { margin-bottom: 0.25rem; }

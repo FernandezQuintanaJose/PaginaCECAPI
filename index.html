@@ -9,9 +9,12 @@
   <meta name="description" content="Centro de Capacitación para Invidentes A. C. en Durango: asociación civil sin fines de lucro con servicios gratuitos para personas ciegas y con baja visión.">
   <link rel="preload" href="assets/fuentes/atkinson-hyperlegible-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/css/sitio.v5.css">
+  <link rel="stylesheet" href="assets/css/contenido.v1.css">
   <script src="assets/js/preferencias.v4.js"></script>
   <script src="assets/js/lectura.v2.js" defer></script>
-  <script src="assets/js/galeria.v1.js" defer></script>
+  <script src="assets/js/validar.v1.js" defer></script>
+  <script src="assets/js/contenido.v1.js" defer></script>
+  <script src="assets/js/galeria.v2.js" defer></script>
 </head>
 <body>
   <a class="salto" href="#contenido">Saltar al contenido</a>
@@ -78,14 +81,19 @@
       <div class="contenedor">
         <svg class="braille" viewBox="0 0 154 32" aria-hidden="true" focusable="false"><circle cx="6" cy="6" r="4"/><circle cx="6" cy="16" r="3" class="vacio"/><circle cx="6" cy="26" r="3" class="vacio"/><circle cx="16" cy="6" r="4"/><circle cx="16" cy="16" r="3" class="vacio"/><circle cx="16" cy="26" r="3" class="vacio"/><circle cx="32" cy="6" r="4"/><circle cx="32" cy="16" r="3" class="vacio"/><circle cx="32" cy="26" r="3" class="vacio"/><circle cx="42" cy="6" r="3" class="vacio"/><circle cx="42" cy="16" r="4"/><circle cx="42" cy="26" r="3" class="vacio"/><circle cx="58" cy="6" r="4"/><circle cx="58" cy="16" r="3" class="vacio"/><circle cx="58" cy="26" r="3" class="vacio"/><circle cx="68" cy="6" r="4"/><circle cx="68" cy="16" r="3" class="vacio"/><circle cx="68" cy="26" r="3" class="vacio"/><circle cx="84" cy="6" r="4"/><circle cx="84" cy="16" r="3" class="vacio"/><circle cx="84" cy="26" r="3" class="vacio"/><circle cx="94" cy="6" r="3" class="vacio"/><circle cx="94" cy="16" r="3" class="vacio"/><circle cx="94" cy="26" r="3" class="vacio"/><circle cx="110" cy="6" r="4"/><circle cx="110" cy="16" r="4"/><circle cx="110" cy="26" r="4"/><circle cx="120" cy="6" r="4"/><circle cx="120" cy="16" r="3" class="vacio"/><circle cx="120" cy="26" r="3" class="vacio"/><circle cx="136" cy="6" r="3" class="vacio"/><circle cx="136" cy="16" r="4"/><circle cx="136" cy="26" r="3" class="vacio"/><circle cx="146" cy="6" r="4"/><circle cx="146" cy="16" r="3" class="vacio"/><circle cx="146" cy="26" r="3" class="vacio"/></svg>
         <h1>Centro de Capacitación para Invidentes</h1>
-        <p>Asociación civil sin fines de lucro en Durango. Atiende a personas ciegas y con baja visión. Todos sus servicios son gratuitos.</p>
+        <p id="lema">Asociación civil sin fines de lucro en Durango. Atiende a personas ciegas y con baja visión. Todos sus servicios son gratuitos.</p>
       </div>
     </div>
 
     <div class="contenedor">
+      <section id="quienes" aria-labelledby="titulo-quienes" hidden>
+        <h2 id="titulo-quienes">Quiénes somos</h2>
+        <div id="quienes-texto"></div>
+      </section>
+
       <section id="historia" aria-labelledby="titulo-historia">
         <h2 id="titulo-historia">Nuestra historia</h2>
-        <p class="pendiente">Texto pendiente. CECAPI debe contar cómo nació: en qué año y por qué se fundó, quiénes la fundaron, dónde empezó a trabajar, cómo ha crecido y cuántas personas ha atendido. Con esa información se redacta esta sección.</p>
+        <p id="historia-pendiente" class="pendiente">Texto pendiente. CECAPI debe contar cómo nació: en qué año y por qué se fundó, quiénes la fundaron, dónde empezó a trabajar, cómo ha crecido y cuántas personas ha atendido. Con esa información se redacta esta sección.</p>
       </section>
 
       <section id="servicios" aria-labelledby="titulo-servicios">
@@ -100,7 +108,7 @@
           <li>Aprendizaje de ciclismo</li>
           <li>Orientación y movilidad</li>
         </ul>
-        <p class="pendiente">Faltan por confirmar con CECAPI: en qué consiste cada servicio, horarios, requisitos y si hay más servicios.</p>
+        <p id="servicios-pendiente" class="pendiente">Faltan por confirmar con CECAPI: en qué consiste cada servicio, horarios, requisitos y si hay más servicios.</p>
       </section>
 
       <section id="gente" aria-labelledby="titulo-gente">
@@ -115,11 +123,17 @@
           <div class="hueco" aria-hidden="true"></div>
         </div>
         <p id="galeria-aviso" class="pendiente">Fotos pendientes. CECAPI entregará las imágenes; cada una lleva una descripción para quien no ve y necesita el permiso por escrito de las personas que aparecen.</p>
+        <div id="equipo" hidden></div>
+      </section>
+
+      <section id="instalaciones" aria-labelledby="titulo-instalaciones" hidden>
+        <h2 id="titulo-instalaciones">Instalaciones</h2>
+        <div id="instalaciones-galeria" class="collage"></div>
       </section>
 
       <section id="contacto" aria-labelledby="titulo-contacto">
         <h2 id="titulo-contacto">Contacto y horario</h2>
-        <dl class="datos">
+        <dl id="contacto-datos" class="datos">
           <dt>Dirección</dt>
           <dd>Calle Jacarandá 1603, colonia Valle Florido, código postal 34226, Durango, Durango.</dd>
           <dt>Teléfono</dt>
@@ -127,8 +141,9 @@
           <dt>Horario</dt>
           <dd>Lunes a viernes, de 2 a 7 de la tarde.</dd>
         </dl>
-        <p><a href="https://www.google.com/maps/search/?api=1&amp;query=Jacarand%C3%A1%201603%2C%20Valle%20Florido%2C%2034226%20Durango%2C%20Dgo.">Abrir la dirección en Google Maps</a> (se abre otro sitio).</p>
-        <p class="pendiente">Datos tomados de Google Maps el 24 de octubre de 2026. Falta que CECAPI los confirme.</p>
+        <p><a id="contacto-mapa" href="https://www.google.com/maps/search/?api=1&amp;query=Jacarand%C3%A1%201603%2C%20Valle%20Florido%2C%2034226%20Durango%2C%20Dgo.">Abrir la dirección en Google Maps</a> (se abre otro sitio).</p>
+        <ul id="contacto-enlaces" class="lista-enlaces" hidden></ul>
+        <p id="contacto-pendiente" class="pendiente">Datos tomados de Google Maps el 24 de octubre de 2026. Falta que CECAPI los confirme.</p>
       </section>
 
       <section id="asistente" aria-labelledby="titulo-asistente">

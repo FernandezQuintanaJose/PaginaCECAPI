@@ -5,7 +5,11 @@
   "scripts": {
     "servir": "node pruebas/servidor.mjs",
     "revisar": "node pruebas/revisar.mjs",
-    "galeria": "node pruebas/galeria.mjs"
+    "galeria": "node pruebas/galeria.mjs",
+    "validar": "node pruebas/validar.mjs",
+    "contenido": "node pruebas/contenido.mjs",
+    "admin": "node pruebas/admin.mjs",
+    "probar": "npm run validar && npm run galeria && npm run contenido && npm run admin && npm run revisar"
   },
   "devDependencies": {
     "axe-core": "^4.10.2",

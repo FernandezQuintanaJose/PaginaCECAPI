@@ -16,8 +16,12 @@ La ficha del proyecto está en `docs/FICHA.md` y las reglas comunes del ecosiste
 | `assets/js/preferencias.v4.js` | Tema (automático, claro u oscuro), tamaño de texto y contraste alto (se guardan solo en el navegador) |
 | `assets/js/lectura.v2.js` | Botón "Escuchar esta página" con la voz del navegador |
 | `assets/fuentes/` | Atkinson Hyperlegible, licencia SIL OFL 1.1 (`LICENCIA-OFL.txt`) |
-| `assets/js/galeria.v1.js` | Collage de fotos: lee `datos/galeria.v1.json` |
-| `datos/galeria.v1.json` | Lista de fotos (vacía por ahora) |
+| `assets/js/galeria.v2.js` | Collage de fotos: lee `datos/galeria.v1.json` |
+| `datos/galeria.v1.json` | Lista de fotos (vacía por ahora). Cada foto: archivo, descripción, pie, sección y autorización si aparecen personas |
+| `datos/sitio.v1.json`, `servicios.v1.json`, `equipo.v1.json` | Textos, servicios y equipo que se pintan en la página de inicio |
+| `assets/js/validar.v1.js` | Reglas del contenido (las usan la página y el editor) |
+| `assets/js/contenido.v1.js` | Pinta esos datos en `index.html`; si un archivo falla, la sección se queda como está |
+| `admin/index.html` | Editor para agregar, editar, ocultar, quitar y ordenar el contenido. Ver `docs/CONTENIDO.md` |
 | `assets/fotos/` | Aquí van las fotos |
 | `pruebas/` | Servidor local y pruebas |
 
@@ -35,6 +39,8 @@ Los textos con recuadro de color (clase `pendiente`) son datos que CECAPI debe d
 - Dominio. Los enlaces al asistente apuntan a `fernandezquintanajose.github.io/PaginaAsistenteCECAPI/` hasta entonces.
 
 ## Agregar fotos al collage
+
+Lo más fácil es el editor de `admin/` (reduce la foto, le quita la ubicación y exige su descripción y la autorización). A mano:
 
 1. Guardar la foto en `assets/fotos/` (JPG o WebP, de preferencia de menos de 300 KB).
 2. Agregarla en `datos/galeria.v1.json`:
@@ -60,6 +66,10 @@ npm install
 npx playwright install chromium   # solo la primera vez
 npm run servir     # abre http://localhost:8080/PaginaCECAPI/
 npm run galeria    # el collage con fotos de prueba
+npm run validar    # reglas del contenido editable
+npm run contenido  # la página de inicio con datos normales, hostiles y archivos rotos
+npm run admin      # el editor contra una GitHub simulada
+npm run probar     # todo lo anterior junto con revisar
 npm run revisar    # consola, recursos rotos, axe (WCAG 2.2 AA) y 5 tamaños de pantalla y texto al 200 %, en claro, oscuro y contraste alto
 ```
 
