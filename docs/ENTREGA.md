@@ -17,7 +17,7 @@ Revisión completa, hallazgos de todo el ecosistema y orden sugerido para la sem
 - Invitar a la persona de CECAPI como colaboradora y que cree su propia llave (pasos en `admin/index.html`).
 
 ## Para entregar
-1. Fusionar `qa/correcciones` a `main`.
+1. ~~Fusionar `qa/correcciones` a `main`~~ (hecho el 4 nov 2026).
 2. Pedir a CECAPI y reemplazar los textos con recuadro `pendiente`: historia, qué incluye cada servicio, horarios y requisitos. No escribir lo que CECAPI no haya confirmado.
 3. Contacto: confirmar código postal (34226 o 34234) y el segundo teléfono 618 455 4155.
 4. Fotos: texto alternativo y permiso por escrito de quienes aparecen (ver README, "Agregar fotos al collage").

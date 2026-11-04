@@ -7,7 +7,7 @@ Semana del 4 al 11 nov 2026. Cada tarea dice qué hacer, dónde y cuándo está 
 ```
 git clone https://github.com/FernandezQuintanaJose/PaginaCECAPI.git
 cd PaginaCECAPI
-git checkout feature/contenido-editable     # hasta que se fusione a main
+git checkout main                           # el trabajo ya está en main
 npm install
 npx playwright install chromium
 npm run probar                              # debe terminar sin FALLA
@@ -26,7 +26,7 @@ Reglas de trabajo:
 | # | Tarea | Dónde | Hecho cuando |
 |---|---|---|---|
 | P1 | **Probar la publicación real del editor** en una copia del repositorio (no en el de CECAPI): crear una llave fine-grained solo con *Contents: Read and write*, cambiar `REPO` en `assets/js/admin.v1.js`, agregar, editar, ocultar y quitar un servicio, subir una foto, publicar. | `admin/`, `assets/js/admin.v1.js` | Los cambios aparecen en el sitio, el commit trae un solo autor y las fotos suben reducidas. Anotar en `docs/CONTENIDO.md` qué pasó y qué falló. Si falla algo, abrir un issue con captura. |
-| P2 | **Fusionar** `qa/correcciones` y `feature/contenido-editable` a `main` y activar Pages. | GitHub | El sitio abre en la URL de Pages y `npm run revisar` pasa contra ella. |
+| P2 | **Activar Pages** (Settings, Pages, rama `main`, carpeta raíz). El código ya está en `main`. | GitHub | El sitio abre en la URL de Pages y `npm run revisar` pasa contra ella. |
 | P3 | **Contenido de CECAPI**: pasar lo que respondan a `datos/*.json` mediante el editor (no a mano). Ver [SOLICITUD_A_CECAPI.md](SOLICITUD_A_CECAPI.md). | `datos/` | Ningún recuadro `pendiente` visible que CECAPI ya haya confirmado. **No escribir lo que no confirmaron.** |
 | P4 | **Aviso de privacidad y términos**: llenar los datos entre corchetes y dar a revisión legal. | `politicas.html` | Sin corchetes. La revisión legal queda por escrito. |
 
