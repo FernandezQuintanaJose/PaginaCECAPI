@@ -16,7 +16,7 @@ export function servir(puerto = PUERTO) {
     if (!ruta.startsWith(PREFIJO)) { res.writeHead(302, { Location: PREFIJO }); return res.end(); }
     let archivo = normalize(join(RAIZ, ruta.slice(PREFIJO.length)));
     if (!archivo.startsWith(RAIZ)) { res.writeHead(403); return res.end(); }
-    if (archivo.endsWith("/")) archivo += "index.html";
+    if (ruta.endsWith("/")) archivo = join(archivo, "index.html");
     try {
       const datos = await readFile(archivo);
       res.writeHead(200, { "Content-Type": TIPOS[extname(archivo)] || "application/octet-stream" });
