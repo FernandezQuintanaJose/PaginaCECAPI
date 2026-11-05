@@ -196,6 +196,12 @@ a:hover { text-decoration-thickness: 0.2em; }
   /* margin-left: auto: si los enlaces no caben, el botón baja a la derecha y no debajo del nombre. */
   .boton-ajustes { order: 3; margin-left: auto; }
 }
+/* Con 7 enlaces o más no caben en una fila con el nombre y el botón: nombre y botón arriba, enlaces abajo. */
+@media (min-width: 48rem) {
+  .cabecera .contenedor:has(.navegacion li:nth-child(7)) .navegacion { order: 3; flex: 1 1 100%; }
+  .cabecera .contenedor:has(.navegacion li:nth-child(7)) .boton-ajustes { order: 2; margin-left: auto; }
+}
+
 
 /* --- Panel de ajustes de lectura: empuja el contenido, no lo tapa --- */
 .panel-ajustes {
@@ -294,7 +300,7 @@ main > .contenedor > section { margin-top: 2.5rem; }
 
 dl.datos { display: grid; grid-template-columns: max-content 1fr; gap: 0.5rem 1.5rem; }
 dl.datos dt { font-weight: 700; }
-dl.datos dd { margin: 0; }
+dl.datos dd { margin: 0; overflow-wrap: anywhere; }
 @media (max-width: 30rem) {
   dl.datos { grid-template-columns: 1fr; gap: 0.1rem; }
   dl.datos dd { margin-bottom: 0.75rem; }
@@ -340,3 +346,13 @@ dl.datos dd { margin: 0; }
 .collage img { display: block; width: 100%; height: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 0.5rem; background: var(--suave); }
 .collage figcaption { font-size: 1rem; margin-top: 0.25rem; max-width: var(--ancho); }
 .hueco { aspect-ratio: 4 / 3; border: 2px dashed var(--linea); border-radius: 0.5rem; background: var(--suave); }
+
+/* --- Para familias y maestros / abecedario braille --- */
+.cita { margin: 1.5rem 0; padding: 0.5rem 1rem; border-left: 0.3rem solid var(--acento); }
+.cita p { margin: 0 0 0.25rem; font-style: italic; }
+.cita footer { font-weight: 700; }
+.tabla-braille { border-collapse: collapse; width: 100%; max-width: 32rem; table-layout: fixed; }
+.tabla-braille caption { text-align: left; font-weight: 700; padding-bottom: 0.5rem; }
+.tabla-braille th, .tabla-braille td { border: 1px solid var(--linea); padding: 0.4rem 0.5rem; text-align: left; overflow-wrap: anywhere; }
+.tabla-braille thead th { background: var(--suave); }
+.celda-braille { font-size: 2.25rem; line-height: 1; }
