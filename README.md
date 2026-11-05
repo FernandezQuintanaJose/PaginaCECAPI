@@ -12,7 +12,7 @@ La ficha del proyecto está en `docs/FICHA.md` y las reglas comunes del ecosiste
 | `aviso-privacidad.html` | Aviso de privacidad del sitio (borrador) |
 | `terminos.html` | Términos de uso (borrador) |
 | `404.html` | Página de error. Usa `<base href="/PaginaCECAPI/">`: si se cambia a un dominio propio, cambiar a `<base href="/">` |
-| `assets/css/sitio.v5.css` | Estilos. Colores en variables de `:root`, con tema oscuro y contraste alto |
+| `assets/css/sitio.v6.css` | Estilos. Colores en variables de `:root`, con tema oscuro y contraste alto |
 | `assets/js/preferencias.v4.js` | Tema (automático, claro u oscuro), tamaño de texto y contraste alto (se guardan solo en el navegador) |
 | `assets/js/lectura.v2.js` | Botón "Escuchar esta página" con la voz del navegador |
 | `assets/fuentes/` | Atkinson Hyperlegible, licencia SIL OFL 1.1 (`LICENCIA-OFL.txt`) |

@@ -192,7 +192,9 @@ a:hover { text-decoration-thickness: 0.2em; }
 /* Tablet y computadora: nombre, enlaces y ajustes en una sola fila. */
 @media (min-width: 48rem) {
   .navegacion { order: 2; flex: 1 1 auto; }
-  .boton-ajustes { order: 3; margin-left: 0; }
+  .navegacion ul { column-gap: 1rem; }
+  /* margin-left: auto: si los enlaces no caben, el botón baja a la derecha y no debajo del nombre. */
+  .boton-ajustes { order: 3; margin-left: auto; }
 }
 
 /* --- Panel de ajustes de lectura: empuja el contenido, no lo tapa --- */

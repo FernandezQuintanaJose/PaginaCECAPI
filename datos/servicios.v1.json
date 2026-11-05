@@ -1,12 +1,20 @@
 {
   "version": 1,
   "servicios": [
-    { "id": "cocina", "nombre": "Cocina", "descripcion": "", "quien": "", "horario": "", "requisitos": "", "foto": "", "fotoAlt": "", "publicado": true },
-    { "id": "encuadernacion", "nombre": "Encuadernación", "descripcion": "", "quien": "", "horario": "", "requisitos": "", "foto": "", "fotoAlt": "", "publicado": true },
-    { "id": "educacion-fisica", "nombre": "Educación física", "descripcion": "", "quien": "", "horario": "", "requisitos": "", "foto": "", "fotoAlt": "", "publicado": true },
-    { "id": "computacion", "nombre": "Computación", "descripcion": "", "quien": "", "horario": "", "requisitos": "", "foto": "", "fotoAlt": "", "publicado": true },
-    { "id": "elaboracion-de-pinatas", "nombre": "Elaboración de piñatas", "descripcion": "", "quien": "", "horario": "", "requisitos": "", "foto": "", "fotoAlt": "", "publicado": true },
-    { "id": "aprendizaje-de-ciclismo", "nombre": "Aprendizaje de ciclismo", "descripcion": "", "quien": "", "horario": "", "requisitos": "", "foto": "", "fotoAlt": "", "publicado": true },
-    { "id": "orientacion-y-movilidad", "nombre": "Orientación y movilidad", "descripcion": "", "quien": "", "horario": "", "requisitos": "", "foto": "", "fotoAlt": "", "publicado": true }
+    {"id": "cocina", "nombre": "Cocina", "descripcion": "", "quien": "", "horario": "", "requisitos": "", "foto": "", "fotoAlt": "", "publicado": true},
+    {"id": "encuadernacion", "nombre": "Encuadernación", "descripcion": "", "quien": "", "horario": "", "requisitos": "", "foto": "", "fotoAlt": "", "publicado": true},
+    {"id": "educacion-fisica", "nombre": "Educación física", "descripcion": "", "quien": "", "horario": "", "requisitos": "", "foto": "", "fotoAlt": "", "publicado": true},
+    {"id": "computacion", "nombre": "Computación", "descripcion": "", "quien": "", "horario": "", "requisitos": "", "foto": "", "fotoAlt": "", "publicado": true},
+    {"id": "elaboracion-de-pinatas", "nombre": "Elaboración de piñatas", "descripcion": "", "quien": "", "horario": "", "requisitos": "", "foto": "", "fotoAlt": "", "publicado": true},
+    {"id": "aprendizaje-de-ciclismo", "nombre": "Aprendizaje de ciclismo", "descripcion": "", "quien": "", "horario": "", "requisitos": "", "foto": "", "fotoAlt": "", "publicado": true},
+    {"id": "orientacion-y-movilidad", "nombre": "Técnicas de orientación y movilidad", "descripcion": "", "quien": "", "horario": "", "requisitos": "", "foto": "", "fotoAlt": "", "publicado": true},
+    {"id": "manualidades", "nombre": "Manualidades", "descripcion": "", "quien": "", "horario": "", "requisitos": "", "foto": "", "fotoAlt": "", "publicado": true},
+    {"id": "musica", "nombre": "Música", "descripcion": "", "quien": "", "horario": "", "requisitos": "", "foto": "", "fotoAlt": "", "publicado": true},
+    {"id": "abaco", "nombre": "Ábaco", "descripcion": "", "quien": "", "horario": "", "requisitos": "", "foto": "", "fotoAlt": "", "publicado": true},
+    {"id": "sistema-braille", "nombre": "Sistema braille", "descripcion": "", "quien": "", "horario": "", "requisitos": "", "foto": "", "fotoAlt": "", "publicado": true},
+    {"id": "apoyo-pedagogico", "nombre": "Apoyo pedagógico", "descripcion": "", "quien": "", "horario": "", "requisitos": "", "foto": "", "fotoAlt": "", "publicado": true},
+    {"id": "ingles", "nombre": "Inglés", "descripcion": "", "quien": "", "horario": "", "requisitos": "", "foto": "", "fotoAlt": "", "publicado": true},
+    {"id": "eficiencia-visual", "nombre": "Eficiencia visual", "descripcion": "", "quien": "", "horario": "", "requisitos": "", "foto": "", "fotoAlt": "", "publicado": true},
+    {"id": "teatro-y-danza", "nombre": "Teatro y danza", "descripcion": "", "quien": "", "horario": "", "requisitos": "", "foto": "", "fotoAlt": "", "publicado": true}
   ]
 }

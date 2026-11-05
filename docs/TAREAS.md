@@ -17,7 +17,7 @@ npm run servir                              # http://localhost:8080/PaginaCECAPI
 Reglas de trabajo:
 - Una rama por tarea: `tarea/<nombre-corto>`. Pull request a `main`. No se sube directo a `main`.
 - Antes de cada pull request: `npm run probar` sin fallas.
-- Si cambias un `.css` o `.js`, súbele la versión al nombre (`sitio.v5.css` → `sitio.v6.css`) y actualiza los enlaces en **todas** las páginas. Si no, el navegador usa la copia vieja.
+- Si cambias un `.css` o `.js`, súbele la versión al nombre (`sitio.v6.css` → `sitio.v6.css`) y actualiza los enlaces en **todas** las páginas. Si no, el navegador usa la copia vieja.
 - No agregar tablas, servidores ni dependencias sin hablarlo: el diseño y sus razones están en [CONTENIDO.md](CONTENIDO.md).
 - No subir llaves, claves ni fotos sin permiso por escrito.
 
@@ -34,7 +34,7 @@ Reglas de trabajo:
 
 | # | Tarea | Dónde | Hecho cuando |
 |---|---|---|---|
-| D1 | **Revisión visual con la gente de CECAPI**: tamaños de letra, contraste, espacios, versión celular y versión grande. Proponer cambios sin romper el contraste 4.5:1. | `assets/css/sitio.v5.css`, `contenido.v1.css` | Capturas antes y después. `npm run revisar` sigue pasando (incluye axe WCAG 2.2 AA). |
+| D1 | **Revisión visual con la gente de CECAPI**: tamaños de letra, contraste, espacios, versión celular y versión grande. Proponer cambios sin romper el contraste 4.5:1. | `assets/css/sitio.v6.css`, `contenido.v1.css` | Capturas antes y después. `npm run revisar` sigue pasando (incluye axe WCAG 2.2 AA). |
 | D2 | **Fotos reales** del plantel y del personal, con texto alternativo y permiso firmado. Reducir con el editor, no a mano. | `admin/` | Cada foto con descripción y autorización registrada. Sin fotos de menores sin permiso del tutor. |
 | D3 | **Probar con lector de pantalla**: NVDA y Narrator en Windows, TalkBack en Android. Recorrer inicio, servicios, equipo, galería, contacto y `admin/`. Anotar qué se escucha mal. | Todo el sitio | Lista de hallazgos en `docs/LECTORES.md` (crearlo) con navegador, versión y qué se escuchó. Las pruebas automáticas **no** sustituyen esto. |
 | D4 | **Sin JavaScript**: decidir si el texto fijo de `index.html` se mantiene al día con `datos/`. | `index.html` | Decisión escrita en `docs/CONTENIDO.md`. |

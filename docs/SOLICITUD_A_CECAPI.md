@@ -27,7 +27,7 @@ No encontramos información verificable, así que la necesitamos de ustedes:
 - [ ] Logros o reconocimientos que quieran mencionar.
 
 ### A3. Servicios (Prioridad 1)
-Hoy el sitio lista: cocina, encuadernación, educación física, computación, elaboración de piñatas, aprendizaje de ciclismo y orientación y movilidad. Para **cada servicio** necesitamos:
+Hoy el sitio lista 15: los 14 del tríptico de CECAPI (piñatas, cocina, encuadernación, manualidades, computación, música, ábaco, sistema braille, apoyo pedagógico, educación física, técnicas de orientación y movilidad, inglés, eficiencia visual, teatro y danza) más aprendizaje de ciclismo, que no viene en el tríptico. ¿Sigue? ¿Teatro y danza es uno o son dos? Para **cada servicio** necesitamos:
 - [ ] Qué se aprende o se hace, en dos o tres frases claras.
 - [ ] Quién lo puede tomar (edades, nivel de visión, si necesitan un acompañante).
 - [ ] Días y horarios.
@@ -81,7 +81,7 @@ Las marcadas como **P1** son las que más necesita el sitio. No tienen que ser p
 |---|---|---|---|
 | 1 | **Fachada o entrada** de CECAPI, de día, donde se lea el nombre | Inicio y Contacto | P1 |
 | 2 | **Foto de grupo** con el equipo y/o los estudiantes que quieran salir | Imagen grande del collage | P1 |
-| 3 | Una foto de **cada servicio en marcha**: cocina, encuadernación, educación física, computación, piñatas, ciclismo, orientación y movilidad (7 fotos) | Servicios | P1 |
+| 3 | Una foto de **cada servicio en marcha**: una por servicio (hasta 15 fotos) | Servicios | P1 |
 | 4 | **Salones y áreas** vacíos y bien iluminados (aulas, cocina, taller, patio) | Nuestras instalaciones | P2 |
 | 5 | **Retrato** de cada integrante del equipo que acepte aparecer | Nuestra gente | P2 |
 | 6 | Detalles: material en braille, bastones, ayudas técnicas, trabajos hechos por los estudiantes | Fondo y relleno | P3 |
