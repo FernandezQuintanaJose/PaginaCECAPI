@@ -97,6 +97,14 @@ const activo = (p) => p.evaluate(() => { const a = document.activeElement; retur
 const nombres = (p, ul) => p.locator(`#${ul} .titulo`).allTextContents();
 const estado = (p) => p.textContent("#estado-cambios");
 const guardar = async (p) => { await p.click("#form-guardar"); await p.waitForTimeout(150); };
+// El diálogo avisa su respuesta con el evento "close", que llega después del clic. Sin esperar, la
+// revisión siguiente a veces veía la lista de antes (falló 4 de 79 en la revisión del 8 nov).
+async function confirmarSi(p, listo) {
+  await p.click("#confirmar-si");
+  await esperar(p, () => !document.getElementById("dialogo-confirmar").open);
+  if (listo) await esperar(p, listo);
+  else await p.evaluate(() => new Promise((r) => requestAnimationFrame(() => setTimeout(r, 0))));
+}
 
 // ---- 1. Antes de conectar y llaves malas
 let gh = await crearGitHub();
@@ -165,7 +173,7 @@ revisar(await p.isVisible("#dialogo-confirmar") && (await p.textContent("#confir
 await p.click("#confirmar-no");
 revisar((await nombres(p, "lista-servicios")).includes("Yoga"), "cancelar no quita nada");
 await p.getByRole("button", { name: "Quitar Yoga" }).click();
-await p.click("#confirmar-si");
+await confirmarSi(p, () => ![...document.querySelectorAll("#lista-servicios .titulo")].some((t) => t.textContent === "Yoga"));
 revisar(!(await nombres(p, "lista-servicios")).includes("Yoga"), "confirmar sí lo quita");
 revisar((await activo(p)) === "agregar-servicios", "después de quitar, el foco vuelve a Agregar");
 
@@ -236,7 +244,7 @@ await p.fill("#campo-nombre", "<img src=x onerror=window.__a=1>");
 await guardar(p);
 revisar(!(await p.evaluate(() => window.__a)) && (await nombres(p, "lista-servicios")).at(-1).startsWith("<img"), "el HTML escrito en un nombre se muestra como texto y no se ejecuta");
 await p.getByRole("button", { name: /^Quitar <img/ }).click();
-await p.click("#confirmar-si");
+await confirmarSi(p, () => ![...document.querySelectorAll("#lista-servicios .titulo")].some((t) => t.textContent.startsWith("<img")));
 
 // ---- 10. Revisar y publicar
 const resumen = await p.locator("#resumen li").allTextContents();
@@ -299,12 +307,12 @@ revisar(gh.commits.length === 1 && gh.parches.length === 1, "al reintentar se pu
 // ---- 13. Descartar y cerrar sesión
 await p.getByRole("button", { name: "Ocultar Computación" }).click();
 await p.click("#descartar");
-await p.click("#confirmar-si");
+await confirmarSi(p, () => document.getElementById("estado-cambios").textContent.includes("No hay cambios"));
 revisar((await estado(p)).includes("No hay cambios") && (await p.locator("#lista-servicios li.oculto").count()) === 1 && await p.getByRole("button", { name: "Mostrar Cocina" }).count() === 1, "Descartar regresa todo a lo último que se publicó");
 await p.getByRole("button", { name: "Ocultar Computación" }).click();
 await p.click("#cerrar-sesion");
 revisar(await p.isVisible("#dialogo-confirmar") && (await p.textContent("#confirmar-texto")).includes("se perderán"), "cerrar sesión con cambios pide confirmación");
-await p.click("#confirmar-si");
+await confirmarSi(p, () => !document.getElementById("conexion").hidden);
 revisar(await p.isVisible("#conexion") && await p.isHidden("#editor") && (await p.inputValue("#llave")) === "", "cerrar sesión regresa a la pantalla de conectar");
 await p.context().close();
 
