@@ -3,7 +3,8 @@
    texto grande, contraste alto y foco siempre visible.
    Paleta: verde y blanco, los colores de CECAPI. Contraste (WCAG AA): texto #10231a sobre blanco 16:1,
    verde #1c6b3c sobre blanco 6.5:1, blanco sobre verde #1c6b3c 6.5:1. Oscuro: verde claro #8fd4a6 sobre #0c1a12 10:1.
-   El nombre lleva versión (v5): al cambiarlo, se renombra a v6 y se actualizan los enlaces. */
+   Colores suavizados (5 nov): fondo verde grisáceo oscuro y franja en degradado, sin menta brillante.
+   El nombre lleva versión (v6): al cambiarlo, se renombra y se actualizan los enlaces. */
 
 @font-face {
   font-family: "Atkinson Hyperlegible";
@@ -29,15 +30,18 @@
 
 :root {
   --escala: 1;
-  --papel: #ffffff;
-  --tinta: #10231a;
-  --suave: #eef6f0;
-  --linea: #5a7364;
+  --papel: #fbfcfa;
+  --tinta: #1a2b22;
+  --suave: #edf3ee;
+  --linea: #5c7366;
   --acento: #1c6b3c;
   --sobre-acento: #ffffff;
   --resalte: #d6eddc;
   --foco: #1c6b3c;
   --error: #9b1c1c;
+  --franja-1: #1d5a3a;
+  --franja-2: #2b7552;
+  --sobre-franja: #f7fbf8;
   --ancho: 68ch;
   --pagina: 60rem;
   color-scheme: light;
@@ -46,28 +50,34 @@
 /* Tema: sin elección (automático) sigue al sistema; "claro" y "oscuro" lo fijan. */
 @media (prefers-color-scheme: dark) {
   :root:not([data-tema]) {
-    --papel: #0c1a12;
-    --tinta: #eef6f0;
-    --suave: #162b1f;
-    --linea: #8fae9b;
-    --acento: #8fd4a6;
-    --sobre-acento: #0c1a12;
-    --resalte: #25593a;
-    --foco: #8fd4a6;
+    --papel: #16211b;
+    --tinta: #e4ece6;
+    --suave: #1f2e26;
+    --linea: #7d9886;
+    --acento: #8cc7a3;
+    --sobre-acento: #10201a;
+    --resalte: #2c4a3a;
+    --foco: #9fd6b6;
     --error: #ffb4b4;
+    --franja-1: #1f3a2d;
+    --franja-2: #2a4f3d;
+    --sobre-franja: #e9f1ec;
     color-scheme: dark;
   }
 }
 :root[data-tema="oscuro"] {
-  --papel: #0c1a12;
-  --tinta: #eef6f0;
-  --suave: #162b1f;
-  --linea: #8fae9b;
-  --acento: #8fd4a6;
-  --sobre-acento: #0c1a12;
-  --resalte: #25593a;
-  --foco: #8fd4a6;
+  --papel: #16211b;
+  --tinta: #e4ece6;
+  --suave: #1f2e26;
+  --linea: #7d9886;
+  --acento: #8cc7a3;
+  --sobre-acento: #10201a;
+  --resalte: #2c4a3a;
+  --foco: #9fd6b6;
   --error: #ffb4b4;
+  --franja-1: #1f3a2d;
+  --franja-2: #2a4f3d;
+  --sobre-franja: #e9f1ec;
   color-scheme: dark;
 }
 
@@ -82,6 +92,9 @@
   --resalte: #ffe14d;
   --foco: #ffe14d;
   --error: #ff9c9c;
+  --franja-1: #ffe14d;
+  --franja-2: #ffe14d;
+  --sobre-franja: #000000;
   color-scheme: dark;
 }
 :root[data-contraste="alto"] .resalte-texto,
@@ -192,8 +205,16 @@ a:hover { text-decoration-thickness: 0.2em; }
 /* Tablet y computadora: nombre, enlaces y ajustes en una sola fila. */
 @media (min-width: 48rem) {
   .navegacion { order: 2; flex: 1 1 auto; }
-  .boton-ajustes { order: 3; margin-left: 0; }
+  .navegacion ul { column-gap: 1rem; }
+  /* margin-left: auto: si los enlaces no caben, el botón baja a la derecha y no debajo del nombre. */
+  .boton-ajustes { order: 3; margin-left: auto; }
 }
+/* Con 7 enlaces o más no caben en una fila con el nombre y el botón: nombre y botón arriba, enlaces abajo. */
+@media (min-width: 48rem) {
+  .cabecera .contenedor:has(.navegacion li:nth-child(7)) .navegacion { order: 3; flex: 1 1 100%; }
+  .cabecera .contenedor:has(.navegacion li:nth-child(7)) .boton-ajustes { order: 2; margin-left: auto; }
+}
+
 
 /* --- Panel de ajustes de lectura: empuja el contenido, no lo tapa --- */
 .panel-ajustes {
@@ -270,18 +291,34 @@ button:disabled { opacity: 0.55; cursor: not-allowed; }
 
 /* --- Franja de celdas braille: el único adorno del sitio --- */
 .franja {
-  background: var(--acento);
-  color: var(--sobre-acento);
-  padding: 2rem 0 2.25rem;
+  background: linear-gradient(135deg, var(--franja-1), var(--franja-2));
+  color: var(--sobre-franja);
+  padding: 2.5rem 0 2.75rem;
 }
-.franja h1 { margin: 1rem 0 0.5rem; max-width: 22ch; }
+.franja h1 { margin: 1.25rem 0 0.75rem; max-width: 22ch; }
 .franja p { font-size: 1.375rem; margin: 0; max-width: 40ch; }
+.franja .acciones { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; }
+.franja .boton { border-color: var(--sobre-franja); background: transparent; color: var(--sobre-franja); }
+.franja .boton:hover { background: rgba(255, 255, 255, 0.14); }
+.franja .boton-principal { background: var(--sobre-franja); color: var(--franja-1); }
+.franja .boton-principal:hover { background: var(--sobre-franja); filter: brightness(0.92); }
+:root[data-contraste="alto"] .franja .boton:hover { background: rgba(0, 0, 0, 0.12); }
 .braille { display: block; height: clamp(3.5rem, 2.5rem + 3vw, 4.75rem); width: auto; max-width: 100%; }
-.braille circle { fill: var(--sobre-acento); }
-.braille circle.vacio { fill: none; stroke: var(--sobre-acento); stroke-width: 1; opacity: 0.45; }
+.braille circle { fill: var(--sobre-franja); animation: aparece 0.6s ease-out both; }
+.braille circle.vacio { fill: none; stroke: var(--sobre-franja); stroke-width: 1; opacity: 0.5; }
+.braille circle:nth-child(3n+1) { animation-delay: 0.05s; }
+.braille circle:nth-child(3n+2) { animation-delay: 0.2s; }
+.braille circle:nth-child(3n) { animation-delay: 0.35s; }
+@keyframes aparece { from { opacity: 0; transform: scale(0.6); } }
+
+/* Tarjetas con lo esencial, justo debajo de la franja */
+.hechos { list-style: none; padding: 0; margin: 2rem 0 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 0.75rem; }
+.hechos li { margin: 0; max-width: none; padding: 1rem 1.1rem; background: var(--suave); border: 1px solid var(--linea); border-radius: 0.75rem; }
+.hechos strong { display: block; font-size: 1.375rem; color: var(--acento); }
+@media (min-width: 40rem) { .hechos { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 
 main { padding-bottom: 3rem; }
-main > .contenedor > section { margin-top: 2.5rem; }
+main > .contenedor > section { margin-top: 3rem; }
 
 .pendiente {
   border-left: 4px solid var(--acento);
@@ -292,7 +329,7 @@ main > .contenedor > section { margin-top: 2.5rem; }
 
 dl.datos { display: grid; grid-template-columns: max-content 1fr; gap: 0.5rem 1.5rem; }
 dl.datos dt { font-weight: 700; }
-dl.datos dd { margin: 0; }
+dl.datos dd { margin: 0; overflow-wrap: anywhere; }
 @media (max-width: 30rem) {
   dl.datos { grid-template-columns: 1fr; gap: 0.1rem; }
   dl.datos dd { margin-bottom: 0.75rem; }
@@ -338,3 +375,13 @@ dl.datos dd { margin: 0; }
 .collage img { display: block; width: 100%; height: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 0.5rem; background: var(--suave); }
 .collage figcaption { font-size: 1rem; margin-top: 0.25rem; max-width: var(--ancho); }
 .hueco { aspect-ratio: 4 / 3; border: 2px dashed var(--linea); border-radius: 0.5rem; background: var(--suave); }
+
+/* --- Para familias y maestros / abecedario braille --- */
+.cita { margin: 1.5rem 0; padding: 0.5rem 1rem; border-left: 0.3rem solid var(--acento); }
+.cita p { margin: 0 0 0.25rem; font-style: italic; }
+.cita footer { font-weight: 700; }
+.tabla-braille { border-collapse: collapse; width: 100%; max-width: 32rem; table-layout: fixed; }
+.tabla-braille caption { text-align: left; font-weight: 700; padding-bottom: 0.5rem; }
+.tabla-braille th, .tabla-braille td { border: 1px solid var(--linea); padding: 0.4rem 0.5rem; text-align: left; overflow-wrap: anywhere; }
+.tabla-braille thead th { background: var(--suave); }
+.celda-braille { font-size: 2.25rem; line-height: 1; }
