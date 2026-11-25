@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 // Prueba del editor (admin/) contra una copia simulada de la API de GitHub: conectar, agregar, editar, ordenar,
 // ocultar, quitar, validar, publicar en un solo commit, conflictos, llave sin permiso y descartar.
 // No toca GitHub de verdad. También revisa que la llave no se guarde en el navegador y la accesibilidad (axe).
@@ -97,6 +98,14 @@ const activo = (p) => p.evaluate(() => { const a = document.activeElement; retur
 const nombres = (p, ul) => p.locator(`#${ul} .titulo`).allTextContents();
 const estado = (p) => p.textContent("#estado-cambios");
 const guardar = async (p) => { await p.click("#form-guardar"); await p.waitForTimeout(150); };
+// El diálogo avisa su respuesta con el evento "close", que llega después del clic. Sin esperar, la
+// revisión siguiente a veces veía la lista de antes (falló 4 de 79 en la revisión del 8 nov).
+async function confirmarSi(p, listo) {
+  await p.click("#confirmar-si");
+  await esperar(p, () => !document.getElementById("dialogo-confirmar").open);
+  if (listo) await esperar(p, listo);
+  else await p.evaluate(() => new Promise((r) => requestAnimationFrame(() => setTimeout(r, 0))));
+}
 
 // ---- 1. Antes de conectar y llaves malas
 let gh = await crearGitHub();
@@ -120,7 +129,9 @@ revisar(await p.isVisible("#editor") && await p.isHidden("#conexion"), "con la l
 revisar((await p.inputValue("#llave")) === "", "la llave se borra del campo");
 const almacenes = await p.evaluate(() => ({ local: Object.keys(localStorage), sesion: Object.keys(sessionStorage), cookies: document.cookie }));
 revisar(almacenes.local.length === 0 && almacenes.sesion.length === 0 && almacenes.cookies === "", "la llave no se guarda en localStorage, sessionStorage ni cookies");
-revisar((await nombres(p, "lista-servicios")).length === 8, "se listan los 8 servicios del repositorio");
+// Los del repositorio más "Yoga", que agrega el GitHub falso.
+const TOTAL = JSON.parse(readFileSync(new URL("../datos/servicios.v1.json", import.meta.url), "utf8")).servicios.length + 1;
+revisar((await nombres(p, "lista-servicios")).length === TOTAL, `se listan los ${TOTAL} servicios del repositorio`);
 revisar((await estado(p)).includes("No hay cambios"), "al inicio no hay cambios por publicar");
 revisar(await p.isDisabled("#publicar"), "no se puede publicar sin cambios");
 revisar(await p.isDisabled('#lista-servicios button[data-accion="subir"][data-indice="0"]'), "el primero no se puede subir");
@@ -139,7 +150,7 @@ await p.fill("#campo-fotoAlt", "");
 await guardar(p);
 revisar(await p.isHidden("#dialogo-form"), "con el nombre ya guarda y cierra");
 revisar((await nombres(p, "lista-servicios")).at(-1) === "Taller de lectura", "el servicio nuevo queda al final");
-revisar((await activo(p)) === "editar:8", "el foco queda en el botón Editar del servicio nuevo");
+revisar((await activo(p)) === `editar:${TOTAL}`, "el foco queda en el botón Editar del servicio nuevo");
 revisar((await estado(p)).includes("Hay cambios"), "aparece que hay cambios sin publicar");
 
 // ---- 4. Editar, ordenar, ocultar
@@ -151,7 +162,7 @@ revisar((await p.locator("#lista-servicios li").last().textContent()).includes("
 
 await p.getByRole("button", { name: "Subir Taller de lectura" }).click();
 revisar((await nombres(p, "lista-servicios")).at(-2) === "Taller de lectura", "Subir mueve el servicio una posición");
-revisar((await activo(p)) === "subir:7", "el foco sigue en el botón Subir del mismo servicio");
+revisar((await activo(p)) === `subir:${TOTAL - 1}`, "el foco sigue en el botón Subir del mismo servicio");
 
 await p.getByRole("button", { name: "Ocultar Cocina" }).click();
 revisar(await p.getByRole("button", { name: "Mostrar Cocina" }).count() === 1 && (await p.locator("#lista-servicios li.oculto").count()) === 1, "Ocultar cambia el botón a Mostrar y marca el servicio");
@@ -165,7 +176,7 @@ revisar(await p.isVisible("#dialogo-confirmar") && (await p.textContent("#confir
 await p.click("#confirmar-no");
 revisar((await nombres(p, "lista-servicios")).includes("Yoga"), "cancelar no quita nada");
 await p.getByRole("button", { name: "Quitar Yoga" }).click();
-await p.click("#confirmar-si");
+await confirmarSi(p, () => ![...document.querySelectorAll("#lista-servicios .titulo")].some((t) => t.textContent === "Yoga"));
 revisar(!(await nombres(p, "lista-servicios")).includes("Yoga"), "confirmar sí lo quita");
 revisar((await activo(p)) === "agregar-servicios", "después de quitar, el foco vuelve a Agregar");
 
@@ -236,7 +247,7 @@ await p.fill("#campo-nombre", "<img src=x onerror=window.__a=1>");
 await guardar(p);
 revisar(!(await p.evaluate(() => window.__a)) && (await nombres(p, "lista-servicios")).at(-1).startsWith("<img"), "el HTML escrito en un nombre se muestra como texto y no se ejecuta");
 await p.getByRole("button", { name: /^Quitar <img/ }).click();
-await p.click("#confirmar-si");
+await confirmarSi(p, () => ![...document.querySelectorAll("#lista-servicios .titulo")].some((t) => t.textContent.startsWith("<img")));
 
 // ---- 10. Revisar y publicar
 const resumen = await p.locator("#resumen li").allTextContents();
@@ -256,7 +267,7 @@ revisar(entradas.some((e) => e.path === "assets/fotos/viejo.webp" && e.sha === n
 revisar(!entradas.some((e) => e.path === "assets/fotos/LEEME.txt"), "no se toca nada más del repositorio");
 revisar(gh.commits[0].parents.join() === "c1" && gh.commits[0].message.includes("Actualización de prueba") && gh.parches[0].force === false, "el commit cuelga del anterior, lleva la nota y no fuerza la rama");
 const servFinal = JSON.parse(gh.archivos.get("datos/servicios.v1.json").toString()).servicios;
-revisar(servFinal.some((s) => s.nombre === "Taller de lectura") && !servFinal.some((s) => s.nombre === "Yoga") && servFinal.length === 8, "el archivo de servicios publicado tiene los cambios");
+revisar(servFinal.some((s) => s.nombre === "Taller de lectura") && !servFinal.some((s) => s.nombre === "Yoga") && servFinal.length === TOTAL, "el archivo de servicios publicado tiene los cambios");
 const equipoFinal = JSON.parse(gh.archivos.get("datos/equipo.v1.json").toString()).personas;
 revisar(equipoFinal.length === 1 && equipoFinal[0].consentimiento === true && equipoFinal[0].consentimientoFecha === "2026-11-02", "la persona se publica con su autorización y la fecha");
 const galeriaFinal = JSON.parse(gh.archivos.get("datos/galeria.v1.json").toString()).fotos;
@@ -299,12 +310,12 @@ revisar(gh.commits.length === 1 && gh.parches.length === 1, "al reintentar se pu
 // ---- 13. Descartar y cerrar sesión
 await p.getByRole("button", { name: "Ocultar Computación" }).click();
 await p.click("#descartar");
-await p.click("#confirmar-si");
+await confirmarSi(p, () => document.getElementById("estado-cambios").textContent.includes("No hay cambios"));
 revisar((await estado(p)).includes("No hay cambios") && (await p.locator("#lista-servicios li.oculto").count()) === 1 && await p.getByRole("button", { name: "Mostrar Cocina" }).count() === 1, "Descartar regresa todo a lo último que se publicó");
 await p.getByRole("button", { name: "Ocultar Computación" }).click();
 await p.click("#cerrar-sesion");
 revisar(await p.isVisible("#dialogo-confirmar") && (await p.textContent("#confirmar-texto")).includes("se perderán"), "cerrar sesión con cambios pide confirmación");
-await p.click("#confirmar-si");
+await confirmarSi(p, () => !document.getElementById("conexion").hidden);
 revisar(await p.isVisible("#conexion") && await p.isHidden("#editor") && (await p.inputValue("#llave")) === "", "cerrar sesión regresa a la pantalla de conectar");
 await p.context().close();
 

@@ -47,10 +47,15 @@ const textos = (p, sel) => p.locator(sel).allTextContents().then((t) => t.map((x
 
 // 1. Los archivos que trae el repositorio
 let p = await abrir();
-revisar((await p.locator(".lista-servicios li").count()) === 7, "con los datos del repositorio salen los 7 servicios");
+revisar((await p.locator(".lista-servicios li").count()) === 15, "con los datos del repositorio salen los 15 servicios");
 revisar((await p.getAttribute("#contacto-datos a[href^='tel:']", "href")) === "tel:+526184550146", "el teléfono es un enlace para llamar");
 revisar(await p.isVisible("#contacto-pendiente") && await p.isVisible("#servicios-pendiente") && await p.isVisible("#historia-pendiente"), "los avisos de por confirmar siguen visibles mientras no se confirme");
 revisar(await p.isHidden("#quienes") && await p.isHidden("#instalaciones") && await p.isHidden("#equipo"), "las secciones sin contenido siguen ocultas");
+revisar((await p.getAttribute("#contacto-datos a[href^='mailto:']", "href")) === "mailto:cecapi.ac@gmail.com", "el correo del triptico sale como enlace");
+revisar((await p.textContent("#contacto-datos")).includes("De 3 a 7 de la tarde"), "el horario es el del triptico (3 a 7)");
+revisar(await p.locator("#braille tbody tr").count() === 26, "el abecedario braille tiene las 26 letras");
+revisar((await p.textContent("#braille tbody tr:first-child")).replace(/\s+/g, "") .startsWith("A1") && (await p.textContent("#braille tbody tr:last-child")).replace(/\s+/g, "").startsWith("Z1356"), "A es el punto 1 y Z son los puntos 1 3 5 6");
+revisar(await p.isVisible("#familias-pendiente") && await p.locator("#familias li").count() === 7, "la seccion para familias muestra sus 7 senales y el aviso de por confirmar");
 revisar(p.errores.length === 0, "sin errores de JavaScript");
 await p.context().close();
 
@@ -130,12 +135,12 @@ await p.context().close();
 
 // 7. Archivos dañados: se queda el texto fijo de la página
 p = await abrir({ sitio: { crudo: "{no es json" }, servicios: { crudo: "", estado: 404 }, equipo: { crudo: "<html>", estado: 200 }, galeria: { crudo: "null" } });
-revisar((await p.locator(".lista-servicios li").count()) === 7 && await p.isVisible("#historia-pendiente") && await p.isHidden("#equipo"), "con archivos dañados o ausentes la página sigue como estaba");
+revisar((await p.locator(".lista-servicios li").count()) === 15 && await p.isVisible("#historia-pendiente") && await p.isHidden("#equipo"), "con archivos dañados o ausentes la página sigue como estaba");
 revisar(p.errores.length === 0, "y sin errores de JavaScript");
 await p.context().close();
 
 p = await abrir({ sitio: { version: 2, lema: "Otra versión" }, servicios: { version: 3, servicios: [servicio()] } });
-revisar((await p.textContent("#lema")).startsWith("Asociación civil") && (await p.locator(".lista-servicios li").count()) === 7, "un archivo de otra versión se ignora");
+revisar((await p.textContent("#lema")).startsWith("Asociación civil") && (await p.locator(".lista-servicios li").count()) === 15, "un archivo de otra versión se ignora");
 await p.context().close();
 
 await navegador.close();
