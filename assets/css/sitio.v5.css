@@ -1,0 +1,340 @@
+/* Estilos comunes del sitio CECAPI y del asistente web.
+   Pensados para baja visión: fuente Atkinson Hyperlegible (Braille Institute),
+   texto grande, contraste alto y foco siempre visible.
+   Paleta: verde y blanco, los colores de CECAPI. Contraste (WCAG AA): texto #10231a sobre blanco 16:1,
+   verde #1c6b3c sobre blanco 6.5:1, blanco sobre verde #1c6b3c 6.5:1. Oscuro: verde claro #8fd4a6 sobre #0c1a12 10:1.
+   El nombre lleva versión (v5): al cambiarlo, se renombra a v6 y se actualizan los enlaces. */
+
+@font-face {
+  font-family: "Atkinson Hyperlegible";
+  src: url("../fuentes/atkinson-hyperlegible-latin-400-normal.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Atkinson Hyperlegible";
+  src: url("../fuentes/atkinson-hyperlegible-latin-400-italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Atkinson Hyperlegible";
+  src: url("../fuentes/atkinson-hyperlegible-latin-700-normal.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --escala: 1;
+  --papel: #ffffff;
+  --tinta: #10231a;
+  --suave: #eef6f0;
+  --linea: #5a7364;
+  --acento: #1c6b3c;
+  --sobre-acento: #ffffff;
+  --resalte: #d6eddc;
+  --foco: #1c6b3c;
+  --error: #9b1c1c;
+  --ancho: 68ch;
+  --pagina: 60rem;
+  color-scheme: light;
+}
+
+/* Tema: sin elección (automático) sigue al sistema; "claro" y "oscuro" lo fijan. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-tema]) {
+    --papel: #0c1a12;
+    --tinta: #eef6f0;
+    --suave: #162b1f;
+    --linea: #8fae9b;
+    --acento: #8fd4a6;
+    --sobre-acento: #0c1a12;
+    --resalte: #25593a;
+    --foco: #8fd4a6;
+    --error: #ffb4b4;
+    color-scheme: dark;
+  }
+}
+:root[data-tema="oscuro"] {
+  --papel: #0c1a12;
+  --tinta: #eef6f0;
+  --suave: #162b1f;
+  --linea: #8fae9b;
+  --acento: #8fd4a6;
+  --sobre-acento: #0c1a12;
+  --resalte: #25593a;
+  --foco: #8fd4a6;
+  --error: #ffb4b4;
+  color-scheme: dark;
+}
+
+/* Contraste máximo, elegido por la persona. Gana sobre el tema del sistema. */
+:root[data-contraste="alto"] {
+  --papel: #000000;
+  --tinta: #ffffff;
+  --suave: #000000;
+  --linea: #ffffff;
+  --acento: #ffe14d;
+  --sobre-acento: #000000;
+  --resalte: #ffe14d;
+  --foco: #ffe14d;
+  --error: #ff9c9c;
+  color-scheme: dark;
+}
+:root[data-contraste="alto"] .resalte-texto,
+:root[data-contraste="alto"] .leyendo { color: #000000; }
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  font-size: calc(100% * var(--escala));
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--papel);
+  color: var(--tinta);
+  font-family: "Atkinson Hyperlegible", Verdana, sans-serif;
+  font-size: 1.25rem;
+  line-height: 1.6;
+  overflow-wrap: break-word;
+}
+
+h1, h2, h3 { line-height: 1.2; margin: 2rem 0 0.75rem; }
+h1 { font-size: clamp(2rem, 1.4rem + 2vw, 2.75rem); margin-top: 0; }
+h2 { font-size: 1.75rem; }
+h3 { font-size: 1.375rem; }
+p, ul, ol, dl { margin: 0 0 1rem; }
+/* Líneas de lectura cómodas aunque la página sea ancha. */
+main p, main li, main dd { max-width: var(--ancho); }
+li + li { margin-top: 0.4rem; }
+
+a { color: var(--acento); text-decoration-thickness: 0.1em; text-underline-offset: 0.2em; }
+a:hover { text-decoration-thickness: 0.2em; }
+
+:focus-visible {
+  outline: 3px solid var(--foco);
+  outline-offset: 3px;
+}
+
+.salto {
+  position: absolute;
+  left: 1rem;
+  top: -10rem;
+  z-index: 10;
+  padding: 0.75rem 1rem;
+  background: var(--acento);
+  color: var(--sobre-acento);
+  font-weight: 700;
+}
+.salto:focus { top: 1rem; }
+
+.solo-lector {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.contenedor {
+  max-width: calc(var(--pagina) + 2rem);
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* --- Encabezado --- */
+.cabecera { border-bottom: 1px solid var(--linea); }
+.cabecera .contenedor {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 1rem;
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
+}
+.marca {
+  order: 1;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--tinta);
+  text-decoration: none;
+}
+.boton-ajustes { order: 2; margin-left: auto; gap: 0.5rem; }
+.boton-ajustes::after {
+  content: "";
+  width: 0.55rem;
+  height: 0.55rem;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg) translateY(-0.1rem);
+}
+.boton-ajustes[aria-expanded="true"]::after { transform: rotate(225deg); }
+.boton-ajustes[aria-expanded="true"] { background: var(--suave); }
+.boton-ajustes[hidden] { display: none; }
+.navegacion { order: 3; flex: 1 1 100%; }
+.navegacion ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.25rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.navegacion li + li { margin-top: 0; }
+.navegacion a[aria-current="page"] { font-weight: 700; text-decoration-thickness: 0.2em; }
+
+/* Tablet y computadora: nombre, enlaces y ajustes en una sola fila. */
+@media (min-width: 48rem) {
+  .navegacion { order: 2; flex: 1 1 auto; }
+  .boton-ajustes { order: 3; margin-left: 0; }
+}
+
+/* --- Panel de ajustes de lectura: empuja el contenido, no lo tapa --- */
+.panel-ajustes {
+  background: var(--suave);
+  border-bottom: 1px solid var(--linea);
+}
+.panel-ajustes[hidden] { display: none; }
+.panel-ajustes .contenedor {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.9rem 1.5rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+@media (min-width: 40rem) {
+  .panel-ajustes .contenedor { grid-template-columns: repeat(auto-fit, minmax(12.5rem, 1fr)); }
+}
+.panel-ajustes .rotulo { font-weight: 700; font-size: 1rem; margin: 0 0 0.35rem; }
+.panel-ajustes .grupo { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.panel-ajustes .grupo button { flex: 1 1 auto; justify-content: center; }
+
+/* Controles de la lectura en voz alta: quedan a la vista mientras se lee. */
+.barra-lectura {
+  position: sticky;
+  top: 0;
+  z-index: 4;
+  background: var(--papel);
+  border-bottom: 1px solid var(--linea);
+}
+.barra-lectura[hidden] { display: none; }
+.barra-lectura .contenedor { display: flex; flex-wrap: wrap; gap: 0.5rem; padding-top: 0.5rem; padding-bottom: 0.5rem; }
+
+/* --- Botones: sobrios; solo el principal lleva relleno --- */
+button, .boton {
+  font: inherit;
+  font-size: 1.05rem;
+  font-weight: 700;
+  min-height: 2.75rem;
+  padding: 0.4rem 1rem;
+  border: 1.5px solid var(--linea);
+  border-radius: 0.5rem;
+  background: var(--papel);
+  color: var(--tinta);
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+button:hover, .boton:hover { background: var(--suave); }
+button[aria-pressed="true"] { background: var(--resalte); border-color: var(--acento); }
+button:disabled { opacity: 0.55; cursor: not-allowed; }
+.boton-principal {
+  background: var(--acento);
+  color: var(--sobre-acento);
+  border-color: var(--acento);
+}
+.boton-principal:hover { background: var(--acento); filter: brightness(1.12); }
+.boton-texto {
+  border-color: transparent;
+  background: transparent;
+  color: var(--acento);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+.boton-texto:hover { background: var(--suave); }
+
+/* Lectura en voz alta: el bloque que se está leyendo. */
+.leyendo {
+  background: var(--resalte);
+  outline: 3px solid var(--resalte);
+}
+
+/* --- Franja de celdas braille: el único adorno del sitio --- */
+.franja {
+  background: var(--acento);
+  color: var(--sobre-acento);
+  padding: 2rem 0 2.25rem;
+}
+.franja h1 { margin: 1rem 0 0.5rem; max-width: 22ch; }
+.franja p { font-size: 1.375rem; margin: 0; max-width: 40ch; }
+.braille { display: block; height: clamp(3.5rem, 2.5rem + 3vw, 4.75rem); width: auto; max-width: 100%; }
+.braille circle { fill: var(--sobre-acento); }
+.braille circle.vacio { fill: none; stroke: var(--sobre-acento); stroke-width: 1; opacity: 0.45; }
+
+main { padding-bottom: 3rem; }
+main > .contenedor > section { margin-top: 2.5rem; }
+
+.pendiente {
+  border-left: 4px solid var(--acento);
+  padding: 0.4rem 0.85rem;
+  font-size: 1.05rem;
+  background: var(--suave);
+}
+
+dl.datos { display: grid; grid-template-columns: max-content 1fr; gap: 0.5rem 1.5rem; }
+dl.datos dt { font-weight: 700; }
+dl.datos dd { margin: 0; }
+@media (max-width: 30rem) {
+  dl.datos { grid-template-columns: 1fr; gap: 0.1rem; }
+  dl.datos dd { margin-bottom: 0.75rem; }
+}
+
+.pie {
+  border-top: 1px solid var(--linea);
+  padding: 1.5rem 0 2rem;
+  font-size: 1.05rem;
+}
+.pie ul { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; }
+.pie li + li { margin-top: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
+}
+
+/* --- Servicios --- */
+.destacado {
+  border-left: 6px solid var(--acento);
+  background: var(--suave);
+  padding: 0.75rem 1rem;
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+.lista-servicios {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.5rem;
+}
+.lista-servicios li { margin: 0; max-width: none; padding: 0.6rem 0.75rem; border: 1px solid var(--linea); border-radius: 0.5rem; font-weight: 700; overflow-wrap: anywhere; }
+@media (min-width: 40rem) { .lista-servicios { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* --- Collage de fotos (los huecos se reemplazan cuando haya fotos) --- */
+.collage { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem; margin: 1rem 0; }
+@media (min-width: 40rem) {
+  .collage { grid-template-columns: repeat(3, 1fr); }
+  .collage > :first-child { grid-column: span 2; grid-row: span 2; }
+}
+.collage figure { margin: 0; }
+.collage img { display: block; width: 100%; height: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 0.5rem; background: var(--suave); }
+.collage figcaption { font-size: 1rem; margin-top: 0.25rem; max-width: var(--ancho); }
+.hueco { aspect-ratio: 4 / 3; border: 2px dashed var(--linea); border-radius: 0.5rem; background: var(--suave); }

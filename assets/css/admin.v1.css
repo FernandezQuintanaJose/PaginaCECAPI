@@ -1,0 +1,50 @@
+/* Editor del contenido (admin/). Usa las variables de sitio.v5.css, así que hereda tema oscuro y contraste alto. */
+
+.campo { margin: 0 0 1rem; max-width: none; }
+.campo label, .campo .rotulo-campo { display: block; font-weight: 700; margin-bottom: 0.25rem; }
+.campo input[type="text"], .campo input[type="password"], .campo input[type="date"], .campo input[type="file"],
+.campo select, .campo textarea {
+  display: block; width: 100%; max-width: 40rem; box-sizing: border-box;
+  font: inherit; color: var(--tinta); background: var(--papel);
+  border: 2px solid var(--linea); border-radius: 0.5rem; padding: 0.5rem 0.65rem;
+}
+.campo textarea { min-height: 6rem; resize: vertical; }
+.campo input[aria-invalid="true"], .campo select[aria-invalid="true"], .campo textarea[aria-invalid="true"] { border-color: var(--error); }
+.campo.casilla label { display: flex; gap: 0.6rem; align-items: flex-start; font-weight: 400; }
+.campo.casilla input { width: 1.4rem; height: 1.4rem; margin: 0.15rem 0 0; flex: none; }
+.ayuda { margin: 0.25rem 0 0; font-size: 1rem; max-width: 40rem; }
+.error { margin: 0.25rem 0 0; color: var(--error); font-weight: 700; max-width: 40rem; }
+.error[hidden], .errores[hidden] { display: none; }
+
+.errores { border-left: 4px solid var(--error); background: var(--suave); padding: 0.5rem 0.85rem; margin: 0 0 1rem; max-width: none; }
+.errores ul, ul.errores { margin: 0.25rem 0 0; padding-left: 1.25rem; }
+
+.acciones { display: flex; flex-wrap: wrap; gap: 0.75rem; max-width: none; }
+
+/* Listas de elementos con sus botones */
+.items { list-style: none; padding: 0; margin: 1rem 0; display: grid; gap: 0.75rem; }
+.items li { margin: 0; max-width: none; display: grid; gap: 0.5rem; grid-template-columns: auto 1fr; align-items: center; padding: 0.75rem; border: 1px solid var(--linea); border-radius: 0.5rem; }
+.items li.oculto { border-style: dashed; }
+.items img { width: 4.5rem; height: 4.5rem; object-fit: cover; border-radius: 0.4rem; background: var(--suave); }
+.items .sin-miniatura { width: 4.5rem; }
+.items .texto { min-width: 0; overflow-wrap: anywhere; }
+.items .titulo { font-weight: 700; display: block; }
+.items .detalle { display: block; font-size: 1rem; }
+.items .botones { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.items .botones button { min-height: 2.75rem; }
+
+.saltos { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; }
+.saltos li { margin: 0; max-width: none; }
+.resumen li { max-width: none; }
+
+#estado-cambios { font-weight: 700; }
+
+/* Cuadros de diálogo */
+dialog {
+  width: calc(100% - 2rem); max-width: 44rem; box-sizing: border-box;
+  max-height: calc(100vh - 2rem); overflow: auto;
+  color: var(--tinta); background: var(--papel);
+  border: 2px solid var(--linea); border-radius: 0.75rem; padding: 1rem 1.25rem;
+}
+dialog::backdrop { background: rgba(0, 0, 0, 0.6); }
+dialog h2 { margin-top: 0; }

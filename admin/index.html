@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: blob:; connect-src 'self' https://api.github.com; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <meta name="referrer" content="no-referrer">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Editor del contenido, CECAPI</title>
+  <link rel="stylesheet" href="../assets/css/sitio.v5.css">
+  <link rel="stylesheet" href="../assets/css/admin.v1.css">
+  <script src="../assets/js/preferencias.v4.js"></script>
+  <script src="../assets/js/validar.v1.js" defer></script>
+  <script src="../assets/js/admin.v1.js" defer></script>
+</head>
+<body>
+  <a class="salto" href="#contenido">Saltar al contenido</a>
+
+  <header class="cabecera">
+    <div class="contenedor">
+      <a class="marca" href="../">CECAPI</a>
+      <nav class="navegacion" aria-label="Principal">
+        <ul>
+          <li><a href="../">Volver al sitio</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenido" tabindex="-1">
+    <div class="contenedor">
+      <h1>Editor del contenido del sitio</h1>
+      <p>Aquí se agregan, cambian o quitan los textos, servicios, equipo y fotos de la página de inicio. Nada cambia en el sitio hasta que revisas y pulsas "Publicar cambios".</p>
+
+      <section id="conexion" aria-labelledby="titulo-conexion">
+        <h2 id="titulo-conexion">Conectar</h2>
+        <p>Guardar cambios requiere una llave de GitHub (token) que solo tenga permiso sobre este sitio. La llave se escribe aquí cada vez que se entra; no se guarda en el navegador y se borra al cerrar la sesión o la pestaña.</p>
+        <details>
+          <summary>Cómo obtener la llave</summary>
+          <ol>
+            <li>Entra a GitHub con la cuenta que tiene permiso de escritura en el repositorio del sitio.</li>
+            <li>Abre Settings, Developer settings, Personal access tokens, Fine-grained tokens, y elige "Generate new token". Los nombres de los menús pueden cambiar.</li>
+            <li>En "Repository access" elige "Only select repositories" y marca solo <strong>PaginaCECAPI</strong>.</li>
+            <li>En "Permissions", Repository permissions, pon <strong>Contents</strong> en "Read and write". No pidas ningún otro permiso.</li>
+            <li>Elige una fecha de vencimiento corta, genera la llave, cópiala y pégala abajo. GitHub la muestra una sola vez.</li>
+          </ol>
+        </details>
+        <form id="f-conexion" novalidate>
+          <p class="campo">
+            <label for="llave">Llave de GitHub</label>
+            <input id="llave" name="llave" type="password" autocomplete="off" autocapitalize="none" spellcheck="false" aria-describedby="llave-error">
+          </p>
+          <p id="llave-error" class="error" hidden></p>
+          <p><button type="submit" class="boton-principal">Conectar</button></p>
+        </form>
+      </section>
+
+      <div id="editor" hidden>
+        <p id="estado-cambios" role="status"></p>
+        <p><button type="button" id="cerrar-sesion">Cerrar sesión</button></p>
+
+        <nav aria-label="Secciones del editor">
+          <ul class="saltos">
+            <li><a href="#ed-sitio">Textos del sitio</a></li>
+            <li><a href="#ed-servicios">Servicios</a></li>
+            <li><a href="#ed-equipo">Equipo</a></li>
+            <li><a href="#ed-galeria">Fotos</a></li>
+            <li><a href="#ed-publicar">Revisar y publicar</a></li>
+          </ul>
+        </nav>
+
+        <section id="ed-sitio" aria-labelledby="titulo-sitio">
+          <h2 id="titulo-sitio">Textos del sitio</h2>
+          <p>Frase de presentación, misión, visión, historia, datos de contacto y enlaces. Son textos únicos: se editan, no se agregan ni se quitan.</p>
+          <p id="resumen-sitio"></p>
+          <p><button type="button" id="editar-sitio">Editar los textos del sitio</button></p>
+        </section>
+
+        <section id="ed-servicios" aria-labelledby="titulo-servicios">
+          <h2 id="titulo-servicios">Servicios</h2>
+          <p>Agrega un servicio nuevo, cambia su horario, ocúltalo por un tiempo o quítalo si ya no se ofrece. Lo que se oculta sigue guardado en el archivo del sitio; es información que no es personal.</p>
+          <p><button type="button" id="agregar-servicios">Agregar un servicio</button></p>
+          <ul id="lista-servicios" class="items"></ul>
+        </section>
+
+        <section id="ed-equipo" aria-labelledby="titulo-equipo">
+          <h2 id="titulo-equipo">Equipo</h2>
+          <p>Solo se publica a quien firmó su autorización. Para retirar a alguien, usa "Quitar": ocultar no basta, porque los datos seguirían en el archivo del sitio.</p>
+          <p><button type="button" id="agregar-equipo">Agregar una persona</button></p>
+          <ul id="lista-equipo" class="items"></ul>
+        </section>
+
+        <section id="ed-galeria" aria-labelledby="titulo-galeria">
+          <h2 id="titulo-galeria">Fotos</h2>
+          <p>Las fotos de "Nuestra gente" e "Instalaciones". La primera de "Nuestra gente" se ve más grande. Cada foto se reduce de tamaño y pierde sus datos ocultos (como la ubicación) antes de guardarse.</p>
+          <p><button type="button" id="agregar-galeria">Agregar una foto</button></p>
+          <ul id="lista-galeria" class="items"></ul>
+        </section>
+
+        <section id="ed-publicar" aria-labelledby="titulo-publicar">
+          <h2 id="titulo-publicar">Revisar y publicar</h2>
+          <p id="sin-cambios">No hay cambios por publicar.</p>
+          <ul id="resumen" class="resumen"></ul>
+          <ul id="problemas" class="errores" hidden></ul>
+          <p class="campo">
+            <label for="mensaje">Nota de los cambios (opcional)</label>
+            <input id="mensaje" type="text" maxlength="100" autocomplete="off" aria-describedby="mensaje-ayuda">
+          </p>
+          <p id="mensaje-ayuda" class="ayuda">Queda en el historial del sitio para saber quién cambió qué y cuándo.</p>
+          <p class="acciones">
+            <button type="button" id="publicar" class="boton-principal" disabled>Publicar cambios</button>
+            <button type="button" id="descartar" disabled>Descartar todos los cambios</button>
+          </p>
+          <p id="resultado" role="status"></p>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <dialog id="dialogo-form" aria-labelledby="dialogo-titulo">
+    <form id="form-elemento" novalidate>
+      <h2 id="dialogo-titulo" tabindex="-1"></h2>
+      <div id="form-errores" class="errores" role="alert" tabindex="-1" hidden></div>
+      <div id="form-campos"></div>
+      <p class="acciones">
+        <button type="submit" id="form-guardar" class="boton-principal">Guardar</button>
+        <button type="button" id="form-cancelar">Cancelar</button>
+      </p>
+    </form>
+  </dialog>
+
+  <dialog id="dialogo-confirmar" aria-labelledby="confirmar-titulo">
+    <h2 id="confirmar-titulo" tabindex="-1"></h2>
+    <p id="confirmar-texto"></p>
+    <p class="acciones">
+      <button type="button" id="confirmar-si" class="boton-principal"></button>
+      <button type="button" id="confirmar-no">Cancelar</button>
+    </p>
+  </dialog>
+
+  <div id="anuncio" class="solo-lector" role="status" aria-live="polite"></div>
+</body>
+</html>

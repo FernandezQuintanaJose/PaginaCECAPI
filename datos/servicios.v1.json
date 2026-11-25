@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "servicios": [
+    { "id": "cocina", "nombre": "Cocina", "descripcion": "", "quien": "", "horario": "", "requisitos": "", "foto": "", "fotoAlt": "", "publicado": true },
+    { "id": "encuadernacion", "nombre": "Encuadernación", "descripcion": "", "quien": "", "horario": "", "requisitos": "", "foto": "", "fotoAlt": "", "publicado": true },
+    { "id": "educacion-fisica", "nombre": "Educación física", "descripcion": "", "quien": "", "horario": "", "requisitos": "", "foto": "", "fotoAlt": "", "publicado": true },
+    { "id": "computacion", "nombre": "Computación", "descripcion": "", "quien": "", "horario": "", "requisitos": "", "foto": "", "fotoAlt": "", "publicado": true },
+    { "id": "elaboracion-de-pinatas", "nombre": "Elaboración de piñatas", "descripcion": "", "quien": "", "horario": "", "requisitos": "", "foto": "", "fotoAlt": "", "publicado": true },
+    { "id": "aprendizaje-de-ciclismo", "nombre": "Aprendizaje de ciclismo", "descripcion": "", "quien": "", "horario": "", "requisitos": "", "foto": "", "fotoAlt": "", "publicado": true },
+    { "id": "orientacion-y-movilidad", "nombre": "Orientación y movilidad", "descripcion": "", "quien": "", "horario": "", "requisitos": "", "foto": "", "fotoAlt": "", "publicado": true }
+  ]
+}

@@ -1,0 +1,3 @@
+Aqui van las fotos del collage (JPG o WebP, de preferencia de menos de 300 KB cada una).
+Cada foto se registra en datos/galeria.v1.json con su archivo, un texto alternativo y, si se quiere, un pie.
+Antes de subir una foto de una persona se necesita su consentimiento por escrito (datos personales sensibles).
