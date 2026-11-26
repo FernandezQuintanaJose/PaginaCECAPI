@@ -10,7 +10,7 @@ const require = createRequire(import.meta.url);
 const { chromium } = require("playwright");
 const AXE = require.resolve("axe-core/axe.min.js");
 const PUERTO = 8096;
-const URL_ADMIN = `http://localhost:${PUERTO}/PaginaCECAPI/admin/`;
+const URL_ADMIN = `http://localhost:${PUERTO}/admin/`;
 const REPO = "/repos/FernandezQuintanaJose/PaginaCECAPI";
 const LLAVE = "github_pat_LLAVE_DE_PRUEBA";
 const PIXEL = Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==", "base64");

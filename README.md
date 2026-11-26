@@ -11,7 +11,7 @@ La ficha del proyecto está en `docs/FICHA.md` y las reglas comunes del ecosiste
 | `index.html` | Inicio: quiénes somos, servicios, contacto, enlace al asistente |
 | `aviso-privacidad.html` | Aviso de privacidad del sitio (borrador) |
 | `terminos.html` | Términos de uso (borrador) |
-| `404.html` | Página de error. Usa `<base href="/PaginaCECAPI/">`: si se cambia a un dominio propio, cambiar a `<base href="/">` |
+| `404.html` | Página de error. Usa `<base href="/">` (dominio propio `cecapi-dgo.com`, ver `CNAME`) |
 | `assets/css/sitio.v6.css` | Estilos. Colores en variables de `:root`, con tema oscuro y contraste alto |
 | `assets/js/preferencias.v4.js` | Tema (automático, claro u oscuro), tamaño de texto y contraste alto (se guardan solo en el navegador) |
 | `assets/js/lectura.v2.js` | Botón "Escuchar esta página" con la voz del navegador |
@@ -64,7 +64,7 @@ Requiere Node 18 o más reciente.
 ```
 npm install
 npx playwright install chromium   # solo la primera vez
-npm run servir     # abre http://localhost:8080/PaginaCECAPI/
+npm run servir     # abre http://localhost:8080/
 npm run galeria    # el collage con fotos de prueba
 npm run validar    # reglas del contenido editable
 npm run contenido  # la página de inicio con datos normales, hostiles y archivos rotos

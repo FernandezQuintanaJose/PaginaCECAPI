@@ -5,7 +5,7 @@ import { extname, join, normalize } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const RAIZ = fileURLToPath(new URL("..", import.meta.url));
-const PREFIJO = process.env.PREFIJO || "/PaginaCECAPI/";
+const PREFIJO = process.env.PREFIJO || "/";
 const PUERTO = Number(process.env.PUERTO || 8080);
 const TIPOS = { ".html": "text/html; charset=utf-8", ".css": "text/css", ".js": "text/javascript",
   ".json": "application/json", ".woff2": "font/woff2", ".svg": "image/svg+xml", ".txt": "text/plain; charset=utf-8" };

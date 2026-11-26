@@ -11,7 +11,7 @@ git checkout main                           # el trabajo ya está en main
 npm install
 npx playwright install chromium
 npm run probar                              # debe terminar sin FALLA
-npm run servir                              # http://localhost:8080/PaginaCECAPI/
+npm run servir                              # http://localhost:8080/
 ```
 
 Reglas de trabajo:

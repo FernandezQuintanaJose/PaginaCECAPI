@@ -8,7 +8,7 @@ const require = createRequire(import.meta.url);
 const { chromium } = require("playwright");
 const AXE = require.resolve("axe-core/axe.min.js");
 const PUERTO = 8091;
-const BASE = `http://localhost:${PUERTO}${process.env.PREFIJO || "/PaginaCECAPI/"}`;
+const BASE = `http://localhost:${PUERTO}${process.env.PREFIJO || "/"}`;
 const PAGINAS = (process.env.PAGINAS || "index.html,aviso-privacidad.html,terminos.html,admin/index.html,no-existe").split(",");
 
 const servidor = await servir(PUERTO);

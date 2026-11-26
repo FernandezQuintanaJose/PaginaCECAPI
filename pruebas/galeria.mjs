@@ -6,7 +6,7 @@ import { servir } from "./servidor.mjs";
 const require = createRequire(import.meta.url);
 const { chromium } = require("playwright");
 const PUERTO = 8093;
-const URL_SITIO = `http://localhost:${PUERTO}/PaginaCECAPI/`;
+const URL_SITIO = `http://localhost:${PUERTO}/`;
 const PIXEL = Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==", "base64");
 
 let fallas = 0;
